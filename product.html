@@ -306,7 +306,7 @@ const SHOP='https://cdn.shopify.com/s/files/1/0630/8931/1840/files/';const LETTE
 const LIFE='https://cdn.shopify.com/s/files/1/0630/8931/1840/files/Stella_James_MAISONLOTAN_014.jpg';
 const CHAINS=[["Choker Necklace", 3450, ["14.5\"", "15\""]], ["Stella Chain", 1100, ["16\"", "18\""]], ["Ball Beads Chain", 1390, ["16\"", "18\""]]];
 const fmt=n=>'$'+n.toLocaleString('en-US')+'.00';
-const glyph=l=>l==='Star'?'✡':l==='Heart'?'♥':l;
+const glyph=l=>l==='Star'?'✡':l==='Heart'?'♡':l;
 const qs=new URLSearchParams(location.search);
 let li=Math.max(0,LETTERS.findIndex(d=>d.l===(qs.get('l')||'B'))),size=qs.get('s')==='g'?'g':'s',ci=-1,len=0,gi=0,gal=[];
 const keys=document.getElementById('keys');
