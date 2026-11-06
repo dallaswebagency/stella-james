@@ -11,14 +11,11 @@
 <style>
 :root{
   --navy:#242577;
-  --navy-deep:#1a1b5c;
-  --blush:#FFDADA;
-  --blush-soft:#FFF1F0;
-  --paper:#FBFAF8;
-  --stone:#F4F2EF;
-  --ink:#1c1c2b;
-  --muted:#6b6b80;
-  --line:rgba(36,37,119,.14);
+  --ink:#1b1b22;
+  --muted:#8a8a93;
+  --line:#e8e6e3;
+  --soft:#f7f6f4;
+  --white:#fff;
   --serif:"Cormorant Garamond","Cormorant",Garamond,Georgia,serif;
   --sans:"DM Sans",system-ui,sans-serif;
   --cond:"Jost","Futura",sans-serif;
@@ -26,258 +23,200 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html,body{overflow-x:clip}
+body{font-family:var(--sans);color:var(--ink);background:var(--white);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
 img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-transform:inherit;letter-spacing:inherit}
-html,body{overflow-x:clip}
-.wrap{width:min(1320px,92vw);margin-inline:auto}
-.eyebrow{font-family:var(--cond);text-transform:uppercase;letter-spacing:.22em;font-size:.82rem;font-weight:500}
-.serif{font-family:var(--serif);font-size-adjust:.47;font-weight:500}
-.btn{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--cond);text-transform:uppercase;letter-spacing:.2em;font-size:.85rem;font-weight:500;padding:1rem 1.9rem;border:1px solid currentColor;transition:background .35s var(--ease),color .35s var(--ease)}
-.btn svg{width:16px;height:16px;transition:transform .35s var(--ease)}
-.btn:hover svg{transform:translateX(4px)}
-.btn--light{color:#fff}.btn--light:hover{background:#fff;color:var(--navy)}
-.btn--navy{color:var(--navy)}.btn--navy:hover{background:var(--navy);color:#fff}
-.btn--solid{background:var(--navy);color:#fff;border-color:var(--navy)}.btn--solid:hover{background:transparent;color:var(--navy)}
+.wrap{width:min(1440px,92vw);margin-inline:auto}
+.lbl{font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:400}
+.ttl{font-family:var(--serif);font-size-adjust:.47;font-weight:500;color:var(--navy);line-height:1.05;letter-spacing:-.005em}
+.link{display:inline-flex;gap:.6rem;align-items:center;font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.74rem;padding-bottom:.35rem;border-bottom:1px solid currentColor;transition:gap .3s var(--ease)}
+.link:hover{gap:1rem}
+.btn{display:inline-flex;justify-content:center;align-items:center;font-family:var(--cond);text-transform:uppercase;letter-spacing:.2em;font-size:.76rem;padding:1.05rem 2.2rem;background:var(--navy);color:#fff;border:1px solid var(--navy);transition:background .3s,color .3s}
+.btn:hover{background:transparent;color:var(--navy)}
 
-/* promise ticker */
-.ticker{background:var(--blush);color:var(--navy);overflow:hidden;white-space:nowrap;font-family:var(--cond);text-transform:uppercase;letter-spacing:.24em;font-size:.76rem;font-weight:500}
-.ticker__track{display:inline-flex;animation:tick 38s linear infinite;padding:.62rem 0}
-.ticker__track span{padding:0 2.2rem;position:relative}
-.ticker__track span::after{content:"";position:absolute;right:-3px;top:50%;width:5px;height:5px;background:var(--navy);transform:translateY(-50%) rotate(45deg)}
-@keyframes tick{to{transform:translateX(-50%)}}
+/* announcement */
+.note{text-align:center;font-family:var(--cond);text-transform:uppercase;letter-spacing:.2em;font-size:.68rem;color:var(--navy);padding:.6rem 1rem;border-bottom:1px solid var(--line);height:2.4rem;overflow:hidden;position:relative}
+.note span{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .8s}
+.note span.on{opacity:1}
 
 /* header */
-.hdr{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff}
-.hdr__in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px}
-.hdr nav{display:flex;gap:2.2rem;font-family:var(--cond);text-transform:uppercase;letter-spacing:.2em;font-size:.82rem}
-.hdr nav a,.hdr nav button{position:relative;padding:.4rem 0}
-.hdr nav a::after,.hdr nav button::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
-.hdr nav a:hover::after,.hdr nav button:hover::after{transform:scaleX(1)}
-.logo{display:block;width:176px;color:#fff}
+.hdr{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);color:var(--navy)}
+.hdr__in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:72px}
+.hdr nav{display:flex;gap:2.4rem}
+.hdr nav a,.hdr nav button,.hdr__right a{font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;opacity:.85;transition:opacity .3s}
+.hdr nav a:hover,.hdr nav button:hover,.hdr__right a:hover{opacity:1}
+.logo{display:block;width:170px;color:var(--navy)}
 .logo svg{width:100%;height:auto;fill:currentColor}
-.hdr__right{justify-self:end;display:flex;gap:1.6rem;align-items:center;font-family:var(--cond);text-transform:uppercase;letter-spacing:.2em;font-size:.82rem}
-.cart-pill{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:50%;background:var(--blush);color:var(--navy);font-size:.72rem;letter-spacing:0;margin-left:.45rem}
-.menu-btn{display:none;width:28px;height:18px;position:relative}
-.menu-btn span{position:absolute;left:0;width:100%;height:1px;background:#fff;transition:.3s}
-.menu-btn span:nth-child(1){top:0}.menu-btn span:nth-child(2){top:8px}.menu-btn span:nth-child(3){top:16px}
+.hdr__right{justify-self:end;display:flex;gap:2rem}
+.menu-btn{display:none;width:24px;height:14px;position:relative}
+.menu-btn span{position:absolute;left:0;width:100%;height:1px;background:var(--navy)}
+.menu-btn span:nth-child(1){top:0}.menu-btn span:nth-child(2){top:7px}.menu-btn span:nth-child(3){top:14px}
 
-/* mega shop panel */
-.mega{position:absolute;left:0;right:0;top:100%;background:var(--paper);color:var(--ink);border-bottom:1px solid var(--line);opacity:0;visibility:hidden;transform:translateY(-8px);transition:.35s var(--ease)}
-.hdr.shop-open .mega{opacity:1;visibility:visible;transform:none}
-.mega__in{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;padding:2rem 0 2.4rem}
-.mega a{display:block}
-.mega figure{aspect-ratio:4/5;overflow:hidden;background:var(--stone)}
-.mega img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
-.mega a:hover img{transform:scale(1.05)}
-.mega span{display:block;margin-top:.8rem;font-family:var(--cond);text-transform:uppercase;letter-spacing:.2em;font-size:.82rem;color:var(--navy)}
+.mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);opacity:0;visibility:hidden;transition:.35s var(--ease)}
+.hdr.shop-open .mega{opacity:1;visibility:visible}
+.mega__in{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;padding:2rem 0 2.5rem}
+.mega figure{aspect-ratio:3/4;overflow:hidden;background:var(--soft)}
+.mega img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.mega a:hover img{transform:scale(1.04)}
+.mega span{display:block;margin-top:.9rem;font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--navy)}
 
-/* mobile drawer */
-.drawer{position:fixed;inset:0;z-index:80;background:var(--navy);color:#fff;padding:6rem 8vw 3rem;display:flex;flex-direction:column;gap:1.2rem;transform:translateX(100%);visibility:hidden;transition:transform .5s var(--ease),visibility .5s}
+.drawer{position:fixed;inset:0;z-index:80;background:#fff;color:var(--navy);padding:6rem 8vw 3rem;display:flex;flex-direction:column;gap:1rem;transform:translateX(100%);visibility:hidden;transition:transform .5s var(--ease),visibility .5s}
 .drawer.open{transform:none;visibility:visible}
-.drawer a{font-family:var(--serif);font-size-adjust:.47;font-size:2.2rem;line-height:1.2}
-.drawer small{font-family:var(--cond);letter-spacing:.2em;text-transform:uppercase;opacity:.6;margin-top:1rem}
-.drawer__close{position:absolute;top:1.4rem;right:6vw;font-family:var(--cond);letter-spacing:.2em;text-transform:uppercase;font-size:.85rem}
-
-/* guidance + newsletter */
-.duo{display:grid;grid-template-columns:1fr 1fr}
-.duo > div{padding:clamp(3.5rem,7vw,6.5rem) clamp(1.5rem,6vw,6rem)}
-.duo__guide{background:var(--navy);color:#fff}
-.duo__news{background:var(--blush);color:var(--navy)}
-.duo h3{font-family:var(--serif);font-size-adjust:.47;font-weight:500;font-size:clamp(2rem,3.4vw,3rem);line-height:1.08;margin:1rem 0 1.1rem}
-.duo p{max-width:30rem;margin-bottom:2rem;opacity:.85}
-.news-form{display:flex;border-bottom:1px solid var(--navy);max-width:30rem}
-.news-form input{flex:1;min-width:0;background:transparent;border:0;padding:1rem 0;font:inherit;color:var(--navy);outline:none}
-.news-form input::placeholder{color:rgba(36,37,119,.55)}
-.news-form button{font-family:var(--cond);text-transform:uppercase;letter-spacing:.2em;font-size:.85rem;color:var(--navy);padding-left:1rem}
-.news-ok{display:none;margin-top:1rem;font-family:var(--cond);letter-spacing:.18em;text-transform:uppercase;font-size:.8rem}
+.drawer a{font-family:var(--serif);font-size-adjust:.47;font-weight:500;font-size:2.2rem;line-height:1.2}
+.drawer small{font-family:var(--cond);letter-spacing:.2em;text-transform:uppercase;font-size:.7rem;color:var(--muted);margin-top:1.2rem}
+.drawer__close{position:absolute;top:1.6rem;right:6vw;font-family:var(--cond);letter-spacing:.2em;text-transform:uppercase;font-size:.72rem}
 
 /* footer */
-.ftr{background:var(--navy-deep);color:#fff;padding:5rem 0 2rem}
-.ftr__top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:4rem;border-bottom:1px solid rgba(255,255,255,.14)}
-.ftr__brand h4{font-family:var(--cond);text-transform:uppercase;letter-spacing:.22em;font-size:.82rem;font-weight:500;color:var(--blush);margin-bottom:1rem}
-.ftr__brand p{max-width:28rem;opacity:.78;font-size:.95rem}
-.ftr__col h5{font-family:var(--cond);text-transform:uppercase;letter-spacing:.22em;font-size:.78rem;font-weight:500;opacity:.55;margin-bottom:1.2rem}
-.ftr__col a{display:block;font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.85rem;margin-bottom:.7rem;opacity:.9;transition:opacity .3s}
-.ftr__col a:hover{opacity:1;color:var(--blush)}
-.ftr__mark{padding:3.5rem 0 2.5rem}
-.ftr__mark svg{width:100%;height:auto;fill:#fff;opacity:.96}
-.ftr__legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.74rem;opacity:.65}
+.ftr{border-top:1px solid var(--line);padding:5.5rem 0 2.2rem;color:var(--ink)}
+.ftr__top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.4fr;gap:3rem}
+.ftr h5{font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.7rem;font-weight:400;color:var(--muted);margin-bottom:1.3rem}
+.ftr__col a{display:block;font-size:.88rem;margin-bottom:.6rem;transition:color .3s}
+.ftr__col a:hover{color:var(--navy)}
+.ftr__brand p{font-size:.88rem;color:var(--muted);max-width:22rem}
+.ftr__news p{font-size:.88rem;color:var(--muted);margin-bottom:1rem}
+.news-form{display:flex;border-bottom:1px solid var(--ink)}
+.news-form input{flex:1;min-width:0;border:0;background:transparent;padding:.8rem 0;font:inherit;outline:none}
+.news-form button{font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.7rem;color:var(--navy)}
+.news-ok{display:none;margin-top:.8rem;font-size:.82rem;color:var(--navy)}
+.ftr__mark{padding:5rem 0 2rem;color:var(--navy)}
+.ftr__mark svg{width:100%;height:auto;fill:currentColor}
+.ftr__legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-family:var(--cond);text-transform:uppercase;letter-spacing:.16em;font-size:.66rem;color:var(--muted)}
 .ftr__legal div{display:flex;gap:1.8rem}
 
-/* reveal */
-.rv{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv{opacity:0;transform:translateY(20px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
 .rv.in{opacity:1;transform:none}
 
 @media (max-width:900px){
-  .hdr nav,.mega{display:none}
+  .hdr nav,.mega,.hdr__right .hide-m{display:none}
   .menu-btn{display:block}
-  .hdr__in{grid-template-columns:auto 1fr auto;gap:1rem}
-  .logo{width:150px;justify-self:center}
-  .hdr__right .hide-m{display:none}
-  .duo{grid-template-columns:minmax(0,1fr)}
+  .hdr__in{grid-template-columns:1fr auto 1fr;height:62px}
+  .logo{width:140px}
   .ftr__top{grid-template-columns:1fr 1fr}
-  .ftr__brand{grid-column:1/-1}
+  .ftr__brand,.ftr__news{grid-column:1/-1}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 
 
-/* HERO */
-.hero{display:grid;grid-template-columns:7fr 5fr;min-height:calc(100vh - 104px);background:var(--navy);color:#fff}
-.hero__media{position:relative;overflow:hidden;background:#111}
-.hero__media > *{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s var(--ease),transform 7s linear;transform:scale(1.06)}
-.hero__media > .on{opacity:1;transform:scale(1)}
-.hero__media picture img{width:100%;height:100%;object-fit:cover}
-.hero__copy{display:flex;flex-direction:column;justify-content:space-between;padding:clamp(2.5rem,5vw,5rem) clamp(1.8rem,4.5vw,4.5rem)}
-.hero__count{display:flex;justify-content:space-between;align-items:center;font-family:var(--cond);letter-spacing:.2em;font-size:.8rem;text-transform:uppercase;opacity:.75}
-.hero__slides{position:relative;flex:1;display:grid;align-items:center}
-.hero__slide{grid-area:1/1;opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease);pointer-events:none}
-.hero__slide.on{opacity:1;transform:none;pointer-events:auto}
-.hero__slide .eyebrow{color:var(--blush);margin-bottom:1.4rem}
-.hero__slide h1{font-family:var(--serif);font-size-adjust:.47;font-weight:500;font-size:clamp(2.6rem,4.6vw,4.6rem);line-height:1.02;letter-spacing:-.01em;margin-bottom:1.5rem}
-.hero__slide p{max-width:26rem;opacity:.85;margin-bottom:2.2rem}
-.hero__bars{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
-.hero__bars button{height:28px;position:relative}
-.hero__bars button::before,.hero__bars button i{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.25)}
-.hero__bars button i{background:#fff;transform:scaleX(0);transform-origin:left}
-.hero__bars button.on i{animation:bar 6.5s linear forwards}
-@keyframes bar{to{transform:scaleX(1)}}
+/* hero: full-bleed, quiet type */
+.hero{position:relative;height:calc(100vh - 110px);min-height:560px;overflow:hidden;color:#fff;background:#eee}
+.hero__m{position:absolute;inset:0;opacity:0;transition:opacity 1.6s var(--ease)}
+.hero__m.on{opacity:1}
+.hero__m video,.hero__m img{width:100%;height:100%;object-fit:cover}
+.hero__m.dark::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.38))}
+.hero__txt{position:absolute;left:4vw;bottom:4.5rem;z-index:2;max-width:40rem}
+.hero__t{position:absolute;left:0;bottom:0;width:100%;opacity:0;transform:translateY(10px);transition:opacity 1s var(--ease) .3s,transform 1s var(--ease) .3s;pointer-events:none}
+.hero__t.on{opacity:1;transform:none;pointer-events:auto}
+.hero__t.ink{color:var(--navy)}
+.hero__t .lbl{display:block;margin-bottom:1rem;opacity:.9}
+.hero__t h1{font-family:var(--serif);font-size-adjust:.47;font-weight:500;font-size:clamp(2.8rem,5.4vw,5.4rem);line-height:1;margin-bottom:1.8rem}
+.hero__dots{position:absolute;right:4vw;bottom:4.7rem;z-index:2;display:flex;gap:.7rem}
+.hero__dots button{width:28px;height:1px;background:rgba(0,0,0,.25);transition:background .4s}
+.hero__dots.light button{background:rgba(255,255,255,.45)}
+.hero__dots button.on{background:var(--navy)}
+.hero__dots.light button.on{background:#fff}
 
-/* INTRO */
-.intro{padding:clamp(5rem,10vw,9rem) 0}
-.intro__in{display:grid;grid-template-columns:1fr 3fr;gap:3rem}
-.intro__in .eyebrow{color:var(--navy);padding-top:.8rem}
-.intro p.serif{font-size:clamp(1.6rem,2.8vw,2.6rem);line-height:1.28;color:var(--navy)}
-.intro p.serif em{font-style:italic}
-.intro .btn{margin-top:2.6rem}
+/* intro */
+.intro{padding:clamp(6rem,12vw,10rem) 0;text-align:center}
+.intro p{font-family:var(--serif);font-size-adjust:.47;font-weight:500;color:var(--navy);font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.4;max-width:52rem;margin:0 auto 2.6rem}
 
-/* LETTER STUDIO */
-.studio{background:var(--blush-soft);padding:clamp(4.5rem,8vw,7.5rem) 0}
-.studio__head{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:3.2rem;flex-wrap:wrap}
-.studio__head h2{font-family:var(--serif);font-size-adjust:.47;font-weight:500;color:var(--navy);font-size:clamp(2.3rem,4.4vw,4rem);line-height:1.04;margin-top:.9rem;max-width:40rem}
-.studio__head p{max-width:27rem;color:var(--muted)}
-.studio__grid{display:grid;grid-template-columns:.9fr 1.1fr 1.15fr;gap:clamp(1.2rem,2.4vw,2.4rem);align-items:stretch}
-.studio__life{position:relative;overflow:hidden;min-height:520px}
-.studio__life img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 78%}
-.studio__life span{position:absolute;left:1.2rem;bottom:1.2rem;background:var(--paper);color:var(--navy);padding:.5rem .9rem}
-.picker{display:flex;flex-direction:column;gap:1.6rem}
-.picker__keys{display:grid;grid-template-columns:repeat(6,1fr);gap:.45rem}
-.picker__keys button{aspect-ratio:1;border:1px solid var(--line);font-family:var(--serif);font-size-adjust:.47;font-size:1.25rem;color:var(--navy);background:var(--paper);transition:.25s var(--ease)}
-.picker__keys button:hover{border-color:var(--navy)}
-.picker__keys button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.sizes{background:var(--paper);border:1px solid var(--line);padding:1.3rem;display:grid;grid-template-columns:96px 1fr;gap:1.1rem;align-items:center}
-.sizes img{width:96px;height:96px;object-fit:cover;background:#fff}
-.sizes .eyebrow{color:var(--muted);font-size:.72rem}
-.sizes h4{font-family:var(--serif);font-size-adjust:.47;font-weight:500;color:var(--navy);font-size:1.3rem;margin:.2rem 0 .7rem}
-.seg{display:inline-grid;grid-template-columns:1fr 1fr;border:1px solid var(--navy)}
-.seg button{font-family:var(--cond);text-transform:uppercase;letter-spacing:.16em;font-size:.78rem;padding:.55rem .9rem;color:var(--navy)}
-.seg button.on{background:var(--navy);color:#fff}
-.display{background:#fafafa;display:flex;flex-direction:column;position:relative}
-.display figure{flex:1;min-height:380px;display:grid;place-items:center;overflow:hidden}
-.display figure{background:#f9f9f9}
-.display figure img{width:100%;height:100%;max-height:520px;object-fit:contain;transition:opacity .35s var(--ease)}
-.display__bar{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.4rem;border-top:1px solid var(--line);background:var(--paper)}
-.display__bar h5{font-family:var(--serif);font-size-adjust:.47;font-weight:500;font-size:1.35rem;color:var(--navy)}
-.display__bar small{display:block;font-family:var(--cond);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-size:.74rem}
-.display__bar strong{font-weight:500;color:var(--navy);font-size:1.05rem}
-.display__glyph{position:absolute;top:1rem;left:1.2rem;font-family:var(--serif);font-size-adjust:.47;font-size:5rem;line-height:1;color:var(--blush);pointer-events:none}
+/* collections */
+.cols{padding-bottom:clamp(6rem,10vw,9rem)}
+.sec-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2.2rem}
+.sec-hd h2{font-size:clamp(2rem,3.2vw,2.8rem)}
+.cols__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.cols__grid a{display:block}
+.cols__grid figure{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--soft)}
+.cols__grid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .9s var(--ease),transform 1.4s var(--ease)}
+.cols__grid img.h{opacity:0}
+.cols__grid a:hover img.h{opacity:1}
+.cols__grid a:hover img{transform:scale(1.03)}
+.cols__grid h3{font-family:var(--serif);font-size-adjust:.47;font-weight:500;color:var(--navy);font-size:1.5rem;margin-top:1.1rem}
+.cols__grid p{color:var(--muted);font-size:.86rem;max-width:20rem}
 
-/* CRAFT */
-.craft{background:var(--navy);color:#fff;padding:clamp(5rem,9vw,8rem) 0;overflow:hidden}
-.craft__top{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(2rem,5vw,5rem);align-items:center;margin-bottom:clamp(4rem,7vw,6rem)}
-.craft__top h2{font-family:var(--serif);font-size-adjust:.47;font-weight:500;font-size:clamp(2.4rem,4.4vw,4.2rem);line-height:1.02;margin-top:1rem}
-.craft__top .eyebrow{color:var(--blush)}
-.craft__orb{width:clamp(220px,24vw,340px);aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.25),0 0 0 14px var(--navy),0 0 0 15px rgba(255,255,255,.15)}
-.craft__orb video{width:100%;height:100%;object-fit:cover}
-.craft__top p{opacity:.85;max-width:26rem}
-.vs{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,.2)}
-.vs__col{padding:2.6rem clamp(1rem,3vw,3rem) 0}
-.vs__col + .vs__col{border-left:1px solid rgba(255,255,255,.2)}
-.vs__col header{display:flex;align-items:center;gap:1.6rem;margin-bottom:2rem}
-.vs__col header img{width:128px;height:128px;object-fit:contain;background:#fff}
-.vs__col.generic header img{filter:grayscale(1);opacity:.8}
-.vs__col h3{font-family:var(--cond);font-weight:500;letter-spacing:.22em;text-transform:uppercase;font-size:1rem}
-.vs__col.ours h3{color:var(--blush)}
-.vs dl{display:grid;grid-template-columns:auto 1fr;border-top:1px solid rgba(255,255,255,.12)}
-.vs dt,.vs dd{padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.12)}
-.vs dt{font-family:var(--cond);letter-spacing:.2em;text-transform:uppercase;font-size:.78rem;opacity:.6;padding-right:2rem}
-.vs dd{font-family:var(--serif);font-size-adjust:.47;font-size:1.2rem}
-.vs__col.generic dd{opacity:.55}
+/* love letters split */
+.ll{display:grid;grid-template-columns:1fr 1fr;min-height:92vh;background:var(--soft)}
+.ll__img{position:relative;overflow:hidden}
+.ll__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ll__txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,6vw,7rem)}
+.ll__txt .lbl{color:var(--navy)}
+.ll__txt h2{font-size:clamp(2.4rem,4vw,3.8rem);margin:1rem 0 1.4rem}
+.ll__txt > p{color:var(--muted);max-width:30rem;margin-bottom:2.6rem}
+.ll__prods{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:2.6rem}
+.ll__prods a figure{aspect-ratio:3/4;background:#fff;overflow:hidden}
+.ll__prods img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.ll__prods a:hover img{transform:scale(1.06)}
+.ll__prods span{display:flex;justify-content:space-between;margin-top:.55rem;font-size:.78rem;color:var(--ink)}
+.ll__prods span b{font-weight:400;color:var(--muted)}
+.ll__foot{display:flex;gap:2.2rem;align-items:center;flex-wrap:wrap}
+.ll__foot small{font-family:var(--cond);text-transform:uppercase;letter-spacing:.16em;font-size:.7rem;color:var(--muted)}
 
-/* MAIN CHARACTERS */
-.mc{position:relative;height:clamp(420px,62vw,760px);overflow:hidden;color:#fff}
-.mc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.mc::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,27,92,.05),rgba(26,27,92,.55))}
-.mc__rail{position:absolute;left:0;right:0;bottom:2.4rem;z-index:2;white-space:nowrap;overflow:hidden}
-.mc__rail div{display:inline-flex;animation:tick 30s linear infinite}
-.mc__rail span{font-family:var(--serif);font-size-adjust:.47;font-size:clamp(3rem,8vw,7.5rem);line-height:1;padding-right:3rem}
-.mc__rail span i{font-style:italic;color:var(--blush)}
+/* craft */
+.craft{padding:clamp(6rem,11vw,10rem) 0}
+.craft__in{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,7vw,8rem);align-items:center}
+.craft__vid{aspect-ratio:1;overflow:hidden;background:#fafafa}
+.craft__vid video{width:100%;height:100%;object-fit:cover}
+.craft__txt .lbl{color:var(--navy)}
+.craft__txt h2{font-size:clamp(2.4rem,4vw,3.6rem);margin:1rem 0 1.4rem}
+.craft__txt > p{color:var(--muted);max-width:30rem;margin-bottom:3rem}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:2rem;border-top:1px solid var(--line);padding-top:2rem}
+.vs img{width:96px;height:96px;object-fit:contain;margin-bottom:1rem}
+.vs h3{font-family:var(--cond);font-weight:400;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--navy);margin-bottom:.8rem}
+.vs .g h3{color:var(--muted)}.vs .g img{filter:grayscale(1);opacity:.7}
+.vs li{list-style:none;font-size:.88rem;padding:.45rem 0;border-bottom:1px solid var(--line)}
+.vs .g li{color:var(--muted)}
 
-/* COLLECTION INDEX */
-.cidx{padding:clamp(5rem,9vw,8rem) 0}
-.cidx__in{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
-.cidx h2{font-family:var(--serif);font-size-adjust:.47;font-weight:500;color:var(--navy);font-size:clamp(2.3rem,4vw,3.6rem);margin:.8rem 0 2.4rem}
-.cidx ol{list-style:none;border-top:1px solid var(--line)}
-.cidx li a{display:grid;grid-template-columns:3.2rem 1fr auto;gap:1rem;align-items:center;padding:1.7rem 0;border-bottom:1px solid var(--line);transition:padding .4s var(--ease)}
-.cidx li a:hover,.cidx li a.on{padding-left:1rem}
-.cidx li b{font-family:var(--cond);font-weight:500;letter-spacing:.15em;color:var(--muted);font-size:.85rem}
-.cidx li h3{font-family:var(--serif);font-size-adjust:.47;font-weight:500;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.05;color:var(--navy)}
-.cidx li p{color:var(--muted);font-size:.95rem;margin-top:.35rem;max-width:30rem}
-.cidx li .go{width:46px;height:46px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--navy);transition:.3s}
-.cidx li .go svg{width:16px}
-.cidx li a:hover .go,.cidx li a.on .go{background:var(--navy);color:#fff;border-color:var(--navy)}
-.cidx__stage{position:sticky;top:110px;aspect-ratio:4/5;overflow:hidden;background:var(--stone)}
-.cidx__stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease)}
-.cidx__stage img.on{opacity:1}
-.cidx__stage .hov{width:42%;height:auto;aspect-ratio:1;left:auto;top:auto;right:1.2rem;bottom:1.2rem;inset:auto 1.2rem 1.2rem auto;border:6px solid var(--paper);transition:opacity .6s var(--ease) .15s}
+/* full-bleed band */
+.band{position:relative;height:clamp(420px,70vw,860px);overflow:hidden;color:#fff}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.band::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.18)}
+.band__t{position:absolute;inset:0;z-index:2;display:grid;place-content:center;text-align:center}
+.band__t h2{font-family:var(--serif);font-size-adjust:.47;font-weight:500;font-size:clamp(2.4rem,5vw,4.6rem);line-height:1.05}
+.band__t .lbl{margin-bottom:1.1rem}
 
-/* FOUNDER */
-.founder{background:var(--blush);color:var(--navy);display:grid;grid-template-columns:1fr 1.1fr}
-.founder figure{min-height:560px;position:relative;overflow:hidden}
-.founder figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.founder__txt{padding:clamp(3.5rem,7vw,7rem) clamp(1.8rem,6vw,6.5rem);display:flex;flex-direction:column;justify-content:center}
-.founder__mark{font-family:var(--serif);font-size-adjust:.47;font-size:7rem;line-height:.6;height:3rem}
-.founder blockquote{font-family:var(--serif);font-size-adjust:.47;font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.32;margin:1.4rem 0 2.4rem}
-.founder cite{font-style:normal;font-family:var(--cond);letter-spacing:.22em;text-transform:uppercase;font-size:.85rem}
-.founder cite span{display:block;font-family:var(--serif);font-size-adjust:.47;font-style:italic;letter-spacing:0;text-transform:none;font-size:1.6rem;margin-top:.3rem}
+/* founder */
+.founder{padding:clamp(6rem,11vw,10rem) 0}
+.founder__in{display:grid;grid-template-columns:5fr 6fr;gap:clamp(3rem,7vw,8rem);align-items:center}
+.founder figure{aspect-ratio:4/5;overflow:hidden}
+.founder figure img{width:100%;height:100%;object-fit:cover}
+.founder blockquote{font-family:var(--serif);font-size-adjust:.47;font-weight:500;color:var(--navy);font-size:clamp(1.6rem,2.5vw,2.3rem);line-height:1.35;margin:1.4rem 0 2.2rem}
+.founder cite{font-style:normal;display:block;font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--muted)}
+.founder cite b{display:block;font-family:var(--serif);font-size-adjust:.47;font-weight:500;font-style:italic;text-transform:none;letter-spacing:0;font-size:1.6rem;color:var(--navy);margin-top:.3rem}
+.founder .lbl{color:var(--navy)}
 
-@media (max-width:1100px){
-  .studio__grid{grid-template-columns:1fr 1fr}
-  .studio__life{grid-column:1/-1;min-height:380px;order:3}
+/* guidance */
+.guide{background:var(--soft);padding:clamp(4.5rem,8vw,6.5rem) 0;text-align:center}
+.guide h2{font-size:clamp(2rem,3.2vw,2.8rem);margin:.9rem 0 1rem}
+.guide p{color:var(--muted);max-width:34rem;margin:0 auto 2.2rem}
+
+@media (max-width:1000px){
+  .cols__grid{grid-template-columns:1fr 1fr;gap:1.6rem 1rem}
+  .ll,.craft__in,.founder__in{grid-template-columns:1fr}
+  .ll__img{min-height:70vh}
 }
-@media (max-width:900px){
-  .hero{grid-template-columns:1fr;min-height:auto}
-  .hero__media{height:62vh}
-  .hero__slides{min-height:300px}
-  .intro__in{grid-template-columns:1fr;gap:1rem}
-  .studio__grid{grid-template-columns:1fr}
-  .craft__top{grid-template-columns:1fr;text-align:left}
-  .craft__orb{margin:0 auto}
+@media (max-width:600px){
+  .hero__txt{right:6vw}.hero__dots{display:none}
+  .ll__prods{grid-template-columns:1fr 1fr}
   .vs{grid-template-columns:1fr}
-  .vs__col + .vs__col{border-left:0;border-top:1px solid rgba(255,255,255,.2);margin-top:2.6rem}
-  .vs__col header img{width:96px;height:96px}
-  .cidx__in{grid-template-columns:1fr}
-  .cidx__stage{display:none}
-  .founder{grid-template-columns:1fr}
-  .founder figure{min-height:420px}
 }
 </style>
 </head>
 <body>
 
-<div class="ticker" aria-label="Our promises"><div class="ticker__track"><span>Ethically sourced</span><span>Designed in NYC</span><span>Free shipping</span><span>Complimentary gift packaging</span><span>Made to last</span><span>Ethically sourced</span><span>Designed in NYC</span><span>Free shipping</span><span>Complimentary gift packaging</span><span>Made to last</span><span>Ethically sourced</span><span>Designed in NYC</span><span>Free shipping</span><span>Complimentary gift packaging</span><span>Made to last</span><span>Ethically sourced</span><span>Designed in NYC</span><span>Free shipping</span><span>Complimentary gift packaging</span><span>Made to last</span></div></div>
+<div class="note" id="note" aria-label="Our promises"><span class=on>Ethically sourced</span><span>Designed in NYC</span><span>Free shipping</span><span>Complimentary gift packaging</span><span>Made to last</span></div>
 <header class="hdr" id="hdr">
   <div class="wrap hdr__in">
     <nav aria-label="Primary">
       <button type="button" id="shopBtn" aria-expanded="false">Shop</button>
+      <a href="collection.html">Love Letters</a>
       <a href="https://www.stella-james.com/about">About</a>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
     <a class="logo" href="index.html" aria-label="Stella James home"><svg viewBox="0 0 166 20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stella James"><path d="M159.144 19.7503C157.212 19.7503 155.401 19.2674 154.484 18.5913C154.943 17.9153 155.208 16.7322 155.112 14.4143H155.305C155.329 18.0602 158.975 19.0984 160.882 19.0984C163.345 19.0984 164.263 17.3117 164.263 15.6216C164.263 13.2071 162.428 11.4928 160.23 10.189C157.236 8.42646 155.546 6.9295 155.546 4.58747C155.546 2.31788 157.14 0.120723 161.631 0.120723C163.079 0.120723 163.804 0.36217 164.48 0L164.552 0.0724342C164.093 0.748483 163.731 2.55933 163.804 4.9255H163.635C163.248 1.03822 161.413 0.651904 160.061 0.651904C158.251 0.651904 156.995 1.25552 156.995 2.9215C156.995 4.90135 158.806 6.7122 161.1 7.99186C164.77 10.0924 165.88 12.0482 165.88 13.8349C165.88 16.3217 164.118 19.7503 159.144 19.7503Z"/><path d="M141.126 19.1464C142.406 18.7601 142.744 16.6353 142.744 15.5971V4.15257C142.744 2.67975 142.116 1.01377 141.126 0.699895V0.506738C141.682 0.579172 142.189 0.627461 144.7 0.627461C147.018 0.627461 151.267 0.337725 153.368 0.434304L153.44 0.506738C152.764 1.52081 152.547 3.25922 152.619 5.16665H152.426C151.339 0.361871 148.515 0.917197 144.917 0.98963C144.796 2.67975 144.796 5.04592 144.796 8.7159L147.114 8.64347C148.346 8.59518 150.374 8.18472 150.736 5.98756H150.929C150.47 7.96742 150.47 9.92313 150.929 11.8788H150.736C150.374 9.70583 148.346 9.24708 147.114 9.22294L144.796 9.17465C144.82 10.9855 144.82 13.1102 144.82 15.5971C144.82 17.6977 145.014 18.7842 146.8 18.7842H147.742C149.794 18.7842 152.619 18.5669 152.619 13.8346H152.788C152.716 16.4663 153.126 18.4945 153.633 19.2671L153.561 19.3395C152.861 19.3637 145.376 19.2188 142.72 19.2188C142.189 19.2188 141.682 19.2671 141.126 19.3395V19.1464Z"/><path d="M129.271 19.7258L121.955 4.22498V15.5971C121.955 17.3355 122.655 18.8566 124.297 19.1463V19.3395C122.051 19.1222 120.627 19.2429 119.299 19.3395V19.1463C120.699 18.8566 121.4 17.3355 121.4 15.5971V3.33163C120.072 1.30348 119.299 1.01374 118.575 0.699866V0.506709C120.579 0.651576 121.762 0.67572 122.897 0.530853L130.188 16.418L135.862 0.603287C137.311 0.651576 138.832 0.627432 140.281 0.506709V0.67572C138.977 0.868877 138.059 1.88295 138.059 4.03182V15.5971C138.059 17.3596 138.76 18.8566 139.677 19.1463V19.3395C138.832 19.2429 135.886 19.1222 133.882 19.3395V19.1463C135.283 18.8566 135.983 17.3355 135.983 15.5971V1.32762L129.44 19.7258H129.271Z"/><path d="M101.114 19.1709C102.66 18.7363 103.746 16.2494 105.291 11.9758L109.589 0.144929H109.758C116.06 17.9154 116.76 18.8328 118.402 19.1709V19.3399C116.036 19.1467 113.669 19.2916 111.569 19.3399V19.1709C113.79 18.7846 114.08 17.4807 111.496 10.9376L106.233 10.841C105.388 13.5452 105.026 15.1387 105.026 16.4667C105.026 18.8328 106.426 19.0501 107.295 19.1709V19.3399C105.219 19.2916 103.191 19.1709 101.114 19.3399V19.1709ZM106.329 10.5512L111.303 10.4547L108.647 3.74247C107.657 6.59154 106.909 8.78869 106.329 10.5512Z"/><path d="M94.7367 19.75C92.9983 19.75 92.105 19.2671 91.1875 18.591C91.6462 17.915 91.9118 16.7319 91.8152 14.414H92.0084C92.0084 17.915 94.6643 19.1946 96.2578 19.1946C98.4308 19.1946 99.0344 16.8043 99.0344 15.5971V4.24912C99.0344 2.51071 98.3343 0.9896 96.6924 0.699866V0.506709C98.2618 0.651576 101.207 0.67572 102.729 0.506709V0.699866C101.811 0.9896 101.111 2.51071 101.111 4.24912L101.111 13.8345C101.111 16.7802 98.962 19.75 94.7367 19.75Z"/><path d="M68.1439 19.1709C69.6891 18.7363 70.7756 16.2494 72.3209 11.9758L76.6186 0.144929H76.7876C83.0894 17.9154 83.7896 18.8328 85.4314 19.1709V19.3399C83.0652 19.1467 80.6991 19.2916 78.5985 19.3399V19.1709C80.8198 18.7846 81.1095 17.4807 78.526 10.9376L73.2625 10.841C72.4175 13.5452 72.0553 15.1387 72.0553 16.4667C72.0553 18.8328 73.4557 19.0501 74.3249 19.1709V19.3399C72.2484 19.2916 70.2203 19.1709 68.1439 19.3399V19.1709ZM73.3591 10.5512L78.3329 10.4547L75.677 3.74247C74.6871 6.59154 73.9386 8.78869 73.3591 10.5512Z"/><path d="M67.5024 19.4361C66.7539 19.1946 59.5588 19.2429 56.8788 19.2429C56.2993 19.2429 55.7923 19.2671 55.2611 19.3395V19.1463C56.5166 18.76 56.8788 16.6594 56.8788 15.5971V4.1284C56.8788 2.65558 56.251 1.01374 55.2611 0.699866V0.506709C56.1544 0.603287 59.1242 0.699866 61.1041 0.506709V0.699866C59.583 1.01374 58.9552 2.65558 58.9552 4.1284V15.5971C58.9552 17.6977 59.1725 18.8083 60.9351 18.8083H61.9008C63.6875 18.8083 66.4883 18.591 66.4883 13.8345H66.6815C66.609 16.4663 66.9954 18.5186 67.5507 19.3636L67.5024 19.4361Z"/><path d="M54.5473 19.4361C53.7988 19.1946 46.6037 19.2429 43.9237 19.2429C43.3442 19.2429 42.8372 19.2671 42.306 19.3395V19.1463C43.5615 18.76 43.9237 16.6594 43.9237 15.5971V4.1284C43.9237 2.65558 43.2959 1.01374 42.306 0.699866V0.506709C43.1993 0.603287 46.1691 0.699866 48.149 0.506709V0.699866C46.6279 1.01374 46.0001 2.65558 46.0001 4.1284V15.5971C46.0001 17.6977 46.2174 18.8083 47.98 18.8083H48.9457C50.7324 18.8083 53.5332 18.591 53.5332 13.8345H53.7264C53.6539 16.4663 54.0403 18.5186 54.5956 19.3636L54.5473 19.4361Z"/><path d="M28.7379 19.1464C30.0175 18.7601 30.3555 16.6353 30.3555 15.5971V4.15257C30.3555 2.67975 29.7278 1.01377 28.7379 0.699895V0.506738C29.2932 0.579172 29.8002 0.627461 32.3113 0.627461C34.6291 0.627461 38.8786 0.337725 40.9792 0.434304L41.0516 0.506738C40.3756 1.52081 40.1583 3.25922 40.2307 5.16665H40.0375C38.951 0.361871 36.1261 0.917197 32.5286 0.98963C32.4078 2.67975 32.4078 5.04592 32.4078 8.7159L34.7257 8.64347C35.9571 8.59518 37.9852 8.18472 38.3474 5.98756H38.5406C38.0818 7.96742 38.0818 9.92313 38.5406 11.8788H38.3474C37.9852 9.70583 35.9571 9.24708 34.7257 9.22294L32.4078 9.17465C32.432 10.9855 32.432 13.1102 32.432 15.5971C32.432 17.6977 32.6251 18.7842 34.4118 18.7842H35.3535C37.4058 18.7842 40.2307 18.5669 40.2307 13.8346H40.3997C40.3273 16.4663 40.7377 18.4945 41.2448 19.2671L41.1723 19.3395C40.4721 19.3637 32.9873 19.2188 30.3314 19.2188C29.8002 19.2188 29.2932 19.2671 28.7379 19.3395V19.1464Z"/><path d="M17.1408 19.1467C18.0583 18.857 18.7585 17.3359 18.7585 15.5975V4.17708C18.7585 2.0765 18.517 1.03829 16.8027 1.03829H16.3681C15.4024 1.03829 12.6016 1.25559 12.6016 6.01207H12.4084C12.4809 3.38031 12.0945 1.32802 11.5875 0.57954L11.6358 0.507105C12.336 0.482961 17.0683 0.603684 19.8208 0.603684C21.849 0.603684 27.3056 0.482961 28.0058 0.507105L28.0541 0.57954C27.5471 1.32802 27.1366 3.38031 27.2332 6.01207H27.04C27.04 1.25559 24.2151 1.03829 23.2735 1.03829H22.8389C21.0522 1.03829 20.8349 2.14894 20.8349 4.17708V15.5975C20.8349 17.3359 21.5351 18.857 22.4526 19.1467V19.3399C20.9315 19.1226 17.9858 19.2433 17.1408 19.3399V19.1467Z"/><path d="M4.65991 19.7503C2.72834 19.7503 0.917495 19.2674 0 18.5913C0.458747 17.9153 0.724338 16.7322 0.62776 14.4143H0.820916C0.845061 18.0602 4.49089 19.0984 6.39832 19.0984C8.86106 19.0984 9.77856 17.3117 9.77856 15.6216C9.77856 13.2071 7.94357 11.4928 5.74641 10.189C2.75248 8.42646 1.06236 6.9295 1.06236 4.58747C1.06236 2.31788 2.6559 0.120723 7.1468 0.120723C8.59548 0.120723 9.31981 0.36217 9.99586 0L10.0683 0.0724342C9.60955 0.748483 9.24738 2.55933 9.31981 4.9255H9.1508C8.76449 1.03822 6.9295 0.651904 5.5774 0.651904C3.76656 0.651904 2.51104 1.25552 2.51104 2.9215C2.51104 4.90135 4.32188 6.7122 6.61562 7.99186C10.2856 10.0924 11.3962 12.0482 11.3962 13.8349C11.3962 16.3217 9.63369 19.7503 4.65991 19.7503Z"/></svg></a>
     <div class="hdr__right">
       <a class="hide-m" href="https://www.instagram.com/stellajamesjewelry" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.stella-james.com/cart">Cart<span class="cart-pill">0</span></a>
+      <a href="https://www.stella-james.com/cart">Cart (0)</a>
     </div>
   </div>
   <div class="mega" id="mega"><div class="wrap mega__in"><a href="collection.html"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e5ffd338da9433b5fbe_Stella_James.jpg" alt="Love Letters" loading="lazy"></figure><span>Love Letters</span></a><a href="https://www.stella-james.com/collections/love-letters-earrings"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e648b2465bb9ddbdce3_Stella_James%20(1).jpg" alt="Earrings" loading="lazy"></figure><span>Earrings</span></a><a href="https://www.stella-james.com/collections/pendants"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e587c04ca1f651a7e28_Stella_James%20(2).jpg" alt="Pendants" loading="lazy"></figure><span>Pendants</span></a><a href="https://www.stella-james.com/collections/rings"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e915b7e42f365821ee1_Stella_James.jpg" alt="Rings" loading="lazy"></figure><span>Rings</span></a></div></div>
@@ -295,179 +234,95 @@ html,body{overflow-x:clip}
 </div>
 <main>
 <section class="hero" id="hero">
-  <div class="hero__media" aria-hidden="true">
-    <video class="on" autoplay muted loop playsinline poster="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68b0ab78b1509e24f2dfe70e_SJ-Home%20Hero-Pattern-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723%2F68b0ab78b1509e24f2dfe70e_SJ-Home%20Hero-Pattern-transcode.mp4" type="video/mp4"></video>
-    <picture><source media="(max-width:900px)" srcset="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a88fcb68e5f8c049f39dc0_SJ_MAISONLOTAN.jpg"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a35d1177c9a610d5a32991_SJ_MAISONLOTAN002.jpg" alt=""></picture>
-    <picture><source media="(max-width:900px)" srcset="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a8a2ddb6916cbdb14124c4_SJ_MAISONLOTAN_004347.jpg"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a8a0eeb36a959d0e46513c_SJ_MAISONLOTAN_0047.jpg" alt=""></picture>
+  <div class="hero__m on" data-ink="1"><video autoplay muted loop playsinline poster="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68b0ab78b1509e24f2dfe70e_SJ-Home%20Hero-Pattern-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723%2F68b0ab78b1509e24f2dfe70e_SJ-Home%20Hero-Pattern-transcode.mp4" type="video/mp4"></video></div>
+  <div class="hero__m dark"><picture><source media="(max-width:900px)" srcset="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a8a2ddb6916cbdb14124c4_SJ_MAISONLOTAN_004347.jpg"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a8a0eeb36a959d0e46513c_SJ_MAISONLOTAN_0047.jpg" alt=""></picture></div>
+  <div class="hero__m dark"><picture><source media="(max-width:900px)" srcset="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a88fcb68e5f8c049f39dc0_SJ_MAISONLOTAN.jpg"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a35d1177c9a610d5a32991_SJ_MAISONLOTAN002.jpg" alt=""></picture></div>
+  <div class="hero__txt">
+    <div class="hero__t ink on"><span class="lbl">Larger carat, clearer readability, and an elegant typeface</span><h1>Cut from a single<br>solid diamond</h1><a class="link" href="collection.html">Find yours</a></div>
+    <div class="hero__t"><span class="lbl">Love Letters collection</span><h1>Turn your loved one’s initials into a diamond keepsake</h1><a class="link" href="collection.html">Find yours</a></div>
+    <div class="hero__t"><span class="lbl">Love Letters collection</span><h1>Crafted to sparkle with the letters you cherish most</h1><a class="link" href="collection.html">Find yours</a></div>
   </div>
-  <div class="hero__copy">
-    <div class="hero__count"><span>Stella James · New York</span><span id="heroNum">01 / 03</span></div>
-    <div class="hero__slides">
-      <div class="hero__slide on">
-        <p class="eyebrow">Larger Carat, Clearer Readability, and an elegant Typeface</p>
-        <h1>Cut from a single solid diamond</h1>
-        <a class="btn btn--light" href="collection.html">Find yours <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
-      </div>
-      <div class="hero__slide">
-        <p class="eyebrow">Love Letters collection</p>
-        <h1>Turn your loved one’s initials into a diamond keepsake</h1>
-        <p>Crafted to sparkle with the letters you cherish most.</p>
-        <a class="btn btn--light" href="collection.html">Find yours <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
-      </div>
-      <div class="hero__slide">
-        <p class="eyebrow">Love Letters collection</p>
-        <h1>Turn your loved one’s initials into a diamond keepsake</h1>
-        <p>Crafted to sparkle with the letters you cherish most.</p>
-        <a class="btn btn--light" href="collection.html">Find yours <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
-      </div>
-    </div>
-    <div class="hero__bars" role="tablist" aria-label="Hero slides">
-      <button class="on" aria-label="Slide 1"><i></i></button><button aria-label="Slide 2"><i></i></button><button aria-label="Slide 3"><i></i></button>
-    </div>
+  <div class="hero__dots" id="dots"><button class="on" aria-label="Slide 1"></button><button aria-label="Slide 2"></button><button aria-label="Slide 3"></button></div>
+</section>
+
+<section class="intro wrap rv">
+  <p>Stella James is a New York-based jewelry house rooted in legacy, emotion, and personal meaning. From our signature carved diamond letters to timeless silhouettes that feel both delicate and powerful, Stella James offers a poetic expression of what matters most: the people we carry with us, always.</p>
+  <a class="link" style="color:var(--navy)" href="https://www.stella-james.com/about">About Stella James</a>
+</section>
+
+<section class="cols wrap">
+  <div class="sec-hd rv"><h2 class="ttl">Our Collections</h2><a class="link" style="color:var(--navy)" href="collection.html">Shop all</a></div>
+  <div class="cols__grid"><a href="collection.html" class="rv"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e5ffd338da9433b5fbe_Stella_James.jpg" alt="Love Letters" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef5061128176_SJ_MAISONLOTAN.jpeg" alt="" loading="lazy"></figure><h3>Love Letters</h3><p>Our signature diamond letter pendants made for our love ones</p></a><a href="https://www.stella-james.com/collections/love-letters-earrings" class="rv"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e648b2465bb9ddbdce3_Stella_James%20(1).jpg" alt="Earrings" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/68acb1cdfa884b5296065c97_Media_Frame_16_9.jpeg" alt="" loading="lazy"></figure><h3>Earrings</h3><p>Elevated diamond essentials for everyday elegance</p></a><a href="https://www.stella-james.com/collections/pendants" class="rv"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e587c04ca1f651a7e28_Stella_James%20(2).jpg" alt="Pendants" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef5061128160_Stella_James_MAISONLOTAN_014115.jpeg" alt="" loading="lazy"></figure><h3>Pendants</h3><p>Timeless diamond pendant crafted with refined clarity and understated elegance</p></a><a href="https://www.stella-james.com/collections/rings" class="rv"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e915b7e42f365821ee1_Stella_James.jpg" alt="Rings" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef506112815a_image_289.jpeg" alt="" loading="lazy"></figure><h3>Rings</h3><p>Timeless diamond rings for every moment</p></a></div>
+</section>
+
+<section class="ll">
+  <div class="ll__img"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a893987af6094c64b54398_SJ_MAISONLOTAN_005.jpg" alt="Model wearing Love Letters pendants" loading="lazy"></div>
+  <div class="ll__txt rv">
+    <span class="lbl">Love Letters collection</span>
+    <h2 class="ttl">Your Story, Spelled in Diamonds.</h2>
+    <p>Each initial in the Love Letters collection is carved from a single lab-grown diamond and set in 18k gold. Wear one alone or string them together into a name, a word, or a subtle declaration of love.</p>
+    <div class="ll__prods"><a href="product.html?l=A&s=s"><figure><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/A-sml-1.jpg" alt="Love Letters A" loading="lazy"></figure><span>A<b>$2,100</b></span></a><a href="product.html?l=M&s=s"><figure><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/M-sml-1.jpg" alt="Love Letters M" loading="lazy"></figure><span>M<b>$2,400</b></span></a><a href="product.html?l=Heart&s=s"><figure><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/Heart-pendant-1.jpg" alt="Love Letters Heart" loading="lazy"></figure><span>Heart<b>$2,300</b></span></a><a href="product.html?l=Star&s=s"><figure><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/StarofDavid-sml-1.jpg" alt="Love Letters Star" loading="lazy"></figure><span>Star<b>$1,950</b></span></a></div>
+    <div class="ll__foot"><a class="btn" href="collection.html">Shop all letters</a><small>Two sizes to choose from · 7.5mm and 9mm</small></div>
   </div>
 </section>
 
-<section class="intro">
-  <div class="wrap intro__in rv">
-    <p class="eyebrow">The house</p>
-    <div>
-      <p class="serif">Stella James is a New York-based jewelry house rooted in legacy, emotion, and personal meaning. From our signature carved diamond letters to timeless silhouettes that feel both delicate and powerful, Stella James offers a poetic expression of what matters most: <em>the people we carry with us, always.</em></p>
-      <a class="btn btn--navy" href="collection.html">All letters <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<section class="studio" id="letters">
-  <div class="wrap">
-    <div class="studio__head rv">
-      <div>
-        <p class="eyebrow" style="color:var(--navy)">Love Letters collection</p>
-        <h2>Your Story, Spelled in Diamonds.</h2>
-      </div>
-      <p>Each initial in the Love Letters collection is carved from a single lab-grown diamond and set in 18k gold. Wear one alone or string them together into a name, a word, or a subtle declaration of love.</p>
-    </div>
-    <div class="studio__grid rv">
-      <div class="studio__life">
-        <img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a893987af6094c64b54398_SJ_MAISONLOTAN_005.jpg" alt="Model wearing Stella James Love Letters pendants" loading="lazy">
-        <span class="eyebrow">Love Letters</span>
-      </div>
-      <div class="picker">
-        <div class="picker__keys" id="keys" aria-label="Choose a letter"></div>
-        <div class="sizes">
-          <img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68868c8e4336ef8453f715a9_004.png" alt="Love Letters pendants in two sizes" loading="lazy">
-          <div>
-            <p class="eyebrow">Express yourself</p>
-            <h4>Two Sizes to Choose from</h4>
-            <div class="seg" id="seg"><button class="on" data-size="s">7.5mm</button><button data-size="g">9mm</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="display">
-        <span class="display__glyph" id="glyph">A</span>
-        <figure><img id="dispImg" src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/A-sml-1.jpg" alt="Love Letters pendant"></figure>
-        <div class="display__bar">
-          <div><h5 id="dispName">Love Letters · A</h5><small id="dispSize">7.5mm · 18k gold</small></div>
-          <div style="text-align:right"><strong id="dispPrice">$2,100.00</strong><br><a class="eyebrow" style="color:var(--navy);font-size:.74rem" href="product.html?l=A&s=s" id="dispLink">View pendant →</a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="craft">
-  <div class="wrap">
-    <div class="craft__top rv">
-      <div>
-        <p class="eyebrow">In delicate type</p>
-        <h2>Cut From a Single Solid Diamond</h2>
-      </div>
-      <div class="craft__orb"><video autoplay muted loop playsinline poster="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/687924ad013d29cc1950becf_SJ-Home%20Hero-Letter%20A-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723%2F687924ad013d29cc1950becf_SJ-Home%20Hero-Letter%20A-transcode.webm" type="video/webm"><source src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723%2F687924ad013d29cc1950becf_SJ-Home%20Hero-Letter%20A-transcode.mp4" type="video/mp4"></video></div>
+<section class="craft wrap">
+  <div class="craft__in">
+    <div class="craft__vid rv"><video autoplay muted loop playsinline poster="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/687924ad013d29cc1950becf_SJ-Home%20Hero-Letter%20A-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723%2F687924ad013d29cc1950becf_SJ-Home%20Hero-Letter%20A-transcode.webm" type="video/webm"><source src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723%2F687924ad013d29cc1950becf_SJ-Home%20Hero-Letter%20A-transcode.mp4" type="video/mp4"></video></div>
+    <div class="craft__txt rv">
+      <span class="lbl">In delicate type</span>
+      <h2 class="ttl">Cut From a Single Solid Diamond</h2>
       <p>Each Love Letter is cut from a single, solid lab-grown diamond using a first-of-its-kind technique. This innovation optimizes the stone’s surface to create a seamless, custom shape set in 18k gold—maximizing brilliance, strength, and meaning.</p>
-    </div>
-    <div class="vs rv">
-      <div class="vs__col ours">
-        <header><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68af3dd474b7f46b85c9d2fa_Love-Letter-K-No-Hoop.jpg" alt="Stella James letter K" loading="lazy"><h3>Stella James</h3></header>
-        <dl><dt>Cut</dt><dd>Precise, symmetrical facets</dd><dt>Design</dt><dd>Refined gold framing</dd><dt>Weight</dt><dd>Large carat diamond</dd></dl>
-      </div>
-      <div class="vs__col generic">
-        <header><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68af3c164e29a4ec00db0c6f_lab-k.jpg" alt="Generic cut letter K" loading="lazy"><h3>Generic Cut</h3></header>
-        <dl><dt>Cut</dt><dd>Uneven carving</dd><dt>Design</dt><dd>Exposed, fragile form</dd><dt>Weight</dt><dd>Light and random</dd></dl>
+      <div class="vs">
+        <div><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68af3dd474b7f46b85c9d2fa_Love-Letter-K-No-Hoop.jpg" alt="Stella James letter K" loading="lazy"><h3>Stella James</h3><ul><li>Precise, symmetrical facets</li><li>Refined gold framing</li><li>Large carat diamond</li></ul></div>
+        <div class="g"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68af3c164e29a4ec00db0c6f_lab-k.jpg" alt="Generic cut letter K" loading="lazy"><h3>Generic Cut</h3><ul><li>Uneven carving</li><li>Exposed, fragile form</li><li>Light and random</li></ul></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="mc" aria-label="For main characters">
+<section class="band">
   <picture><source media="(max-width:700px)" srcset="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68acb39fc63019f63d2c59e6_Stella-James-_-MAISON-LOTAN-_1333mobile.jpg"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68acb397296a87649ced509f_Stella-James-_-MAISON-LOTAN-_1333.jpg" alt="Hands holding Stella James diamond letters" loading="lazy"></picture>
-  <div class="mc__rail"><div><span>For Main Characters <i>·</i> Cut from the same stone <i>·</i> </span><span>For Main Characters <i>·</i> Cut from the same stone <i>·</i> </span><span>For Main Characters <i>·</i> Cut from the same stone <i>·</i> </span><span>For Main Characters <i>·</i> Cut from the same stone <i>·</i> </span></div></div>
+  <div class="band__t rv"><span class="lbl">For Main Characters</span><h2>Cut from the same stone</h2></div>
 </section>
 
-<section class="cidx">
-  <div class="wrap cidx__in">
+<section class="founder wrap">
+  <div class="founder__in">
+    <figure class="rv"><picture><source media="(max-width:900px)" srcset="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68c48a73e6117972e37e9723_sJ_2x.jpg"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68c48a73e6117972e37e9723_sJ_2x.jpg" alt="Stella James campaign" loading="lazy"></picture></figure>
     <div class="rv">
-      <p class="eyebrow" style="color:var(--navy)">Shop</p>
-      <h2>Our Collections</h2>
-      <ol id="cList"><li><a href="collection.html" data-i="0" class=on><b>01</b><div><h3>Love Letters</h3><p>Our signature diamond letter pendants made for our love ones</p></div><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a></li><li><a href="https://www.stella-james.com/collections/love-letters-earrings" data-i="1"><b>02</b><div><h3>Earrings</h3><p>Elevated diamond essentials for everyday elegance</p></div><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a></li><li><a href="https://www.stella-james.com/collections/pendants" data-i="2"><b>03</b><div><h3>Pendants</h3><p>Timeless diamond pendant crafted with refined clarity and understated elegance</p></div><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a></li><li><a href="https://www.stella-james.com/collections/rings" data-i="3"><b>04</b><div><h3>Rings</h3><p>Timeless diamond rings for every moment</p></div><span class="go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a></li></ol>
+      <span class="lbl">Our story</span>
+      <blockquote>“This brand began with a feeling I couldn’t put into words—the kind that lives deep in the heart, so I created something to wear instead. I hope this piece carries a part of your story, just as it carries mine.”</blockquote>
+      <cite>With all my heart,<b>Melanie Bronfman</b></cite>
     </div>
-    <div class="cidx__stage" id="cStage"><img class="main on" data-i="0" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e5ffd338da9433b5fbe_Stella_James.jpg" alt="Love Letters" loading="lazy"><img class="hov on" data-i="0" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef5061128176_SJ_MAISONLOTAN.jpeg" alt="" loading="lazy"><img class="main" data-i="1" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e648b2465bb9ddbdce3_Stella_James%20(1).jpg" alt="Earrings" loading="lazy"><img class="hov" data-i="1" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/68acb1cdfa884b5296065c97_Media_Frame_16_9.jpeg" alt="" loading="lazy"><img class="main" data-i="2" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e587c04ca1f651a7e28_Stella_James%20(2).jpg" alt="Pendants" loading="lazy"><img class="hov" data-i="2" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef5061128160_Stella_James_MAISONLOTAN_014115.jpeg" alt="" loading="lazy"><img class="main" data-i="3" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e915b7e42f365821ee1_Stella_James.jpg" alt="Rings" loading="lazy"><img class="hov" data-i="3" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef506112815a_image_289.jpeg" alt="" loading="lazy"></div>
   </div>
 </section>
 
-<section class="founder">
-  <figure><picture><source media="(max-width:900px)" srcset="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68c48a73e6117972e37e9723_sJ_2x.jpg"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68c48a0f7e860a25c667a690_250618_StellaJames41490.jpg" alt="Stella James campaign" loading="lazy"></picture></figure>
-  <div class="founder__txt rv">
-    <span class="founder__mark">“</span>
-    <blockquote>This brand began with a feeling I couldn’t put into words—the kind that lives deep in the heart, so I created something to wear instead. I hope this piece carries a part of your story, just as it carries mine.</blockquote>
-    <cite>With all my heart,<span>Melanie Bronfman</span></cite>
-  </div>
-</section>
-
-<section class="duo">
-  <div class="duo__guide rv">
-    <p class="eyebrow" style="color:var(--blush)">Need guidance?</p>
-    <h3>Talk to a Specialist</h3>
+<section class="guide">
+  <div class="wrap rv">
+    <span class="lbl" style="color:var(--navy)">Need guidance?</span>
+    <h2 class="ttl">Talk to a Specialist</h2>
     <p>We’re here to help you find your perfect combination. Whether selecting your first letter, curating a meaningful set, or creating a piece that tells your story.</p>
-    <a class="btn btn--light" href="https://wa.me/19398456949" target="_blank" rel="noopener">Chat on WhatsApp <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
-  </div>
-  <div class="duo__news rv">
-    <p class="eyebrow">Our newsletter</p>
-    <h3>Join the Family</h3>
-    <p>Be the first to know about exciting new designs, special events, and much more.</p>
-    <form class="news-form" onsubmit="event.preventDefault();this.nextElementSibling.style.display='block';this.reset();">
-      <input type="email" required placeholder="Email address" aria-label="Email address">
-      <button type="submit">Subscribe</button>
-    </form>
-    <p class="news-ok">Thank you for joining the family.</p>
+    <a class="btn" href="https://wa.me/19398456949" target="_blank" rel="noopener">Chat on WhatsApp</a>
   </div>
 </section>
 </main>
 <footer class="ftr">
   <div class="wrap">
     <div class="ftr__top">
-      <div class="ftr__brand">
-        <h4>Generational Brilliance</h4>
-        <p>Stella James creates meaningful jewelry designed to be passed down. With a signature diamond carving technique and a deep reverence for family ties, the brand captures the beauty of connection through fine materials, personal symbolism, and timeless design.</p>
-      </div>
+      <div class="ftr__brand"><h5>Generational Brilliance</h5>
+        <p>Stella James creates meaningful jewelry designed to be passed down. With a signature diamond carving technique and a deep reverence for family ties, the brand captures the beauty of connection through fine materials, personal symbolism, and timeless design.</p></div>
       <div class="ftr__col"><h5>Collections</h5>
-        <a href="collection.html">Love Letters</a>
-        <a href="https://www.stella-james.com/collections/love-letters-earrings">Earrings</a>
-        <a href="https://www.stella-james.com/collections/pendants">Pendants</a>
-        <a href="https://www.stella-james.com/collections/rings">Rings</a>
-      </div>
-      <div class="ftr__col"><h5>Company</h5>
-        <a href="https://www.stella-james.com/about">About</a>
-        <a href="https://www.stella-james.com/about">Our Diamonds</a>
-      </div>
-      <div class="ftr__col"><h5>Contact</h5>
-        <a href="https://www.stella-james.com/policies/customer-care">Contact Us</a>
-        <a href="https://www.instagram.com/stellajamesjewelry" target="_blank" rel="noopener">Instagram</a>
-      </div>
+        <a href="collection.html">Love Letters</a><a href="https://www.stella-james.com/collections/love-letters-earrings">Earrings</a><a href="https://www.stella-james.com/collections/pendants">Pendants</a><a href="https://www.stella-james.com/collections/rings">Rings</a></div>
+      <div class="ftr__col"><h5>Company</h5><a href="https://www.stella-james.com/about">About</a><a href="https://www.stella-james.com/about">Our Diamonds</a></div>
+      <div class="ftr__col"><h5>Contact</h5><a href="https://www.stella-james.com/policies/customer-care">Contact Us</a><a href="https://wa.me/19398456949" target="_blank" rel="noopener">Chat on WhatsApp</a><a href="https://www.instagram.com/stellajamesjewelry" target="_blank" rel="noopener">Instagram</a></div>
+      <div class="ftr__news"><h5>Join the Family</h5>
+        <p>Be the first to know about exciting new designs, special events, and much more.</p>
+        <form class="news-form" onsubmit="event.preventDefault();this.nextElementSibling.style.display='block';this.reset();"><input type="email" required placeholder="Email address" aria-label="Email address"><button type="submit">Subscribe</button></form>
+        <p class="news-ok">Thank you for joining the family.</p></div>
     </div>
     <div class="ftr__mark"><svg viewBox="0 0 166 20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stella James"><path d="M159.144 19.7503C157.212 19.7503 155.401 19.2674 154.484 18.5913C154.943 17.9153 155.208 16.7322 155.112 14.4143H155.305C155.329 18.0602 158.975 19.0984 160.882 19.0984C163.345 19.0984 164.263 17.3117 164.263 15.6216C164.263 13.2071 162.428 11.4928 160.23 10.189C157.236 8.42646 155.546 6.9295 155.546 4.58747C155.546 2.31788 157.14 0.120723 161.631 0.120723C163.079 0.120723 163.804 0.36217 164.48 0L164.552 0.0724342C164.093 0.748483 163.731 2.55933 163.804 4.9255H163.635C163.248 1.03822 161.413 0.651904 160.061 0.651904C158.251 0.651904 156.995 1.25552 156.995 2.9215C156.995 4.90135 158.806 6.7122 161.1 7.99186C164.77 10.0924 165.88 12.0482 165.88 13.8349C165.88 16.3217 164.118 19.7503 159.144 19.7503Z"/><path d="M141.126 19.1464C142.406 18.7601 142.744 16.6353 142.744 15.5971V4.15257C142.744 2.67975 142.116 1.01377 141.126 0.699895V0.506738C141.682 0.579172 142.189 0.627461 144.7 0.627461C147.018 0.627461 151.267 0.337725 153.368 0.434304L153.44 0.506738C152.764 1.52081 152.547 3.25922 152.619 5.16665H152.426C151.339 0.361871 148.515 0.917197 144.917 0.98963C144.796 2.67975 144.796 5.04592 144.796 8.7159L147.114 8.64347C148.346 8.59518 150.374 8.18472 150.736 5.98756H150.929C150.47 7.96742 150.47 9.92313 150.929 11.8788H150.736C150.374 9.70583 148.346 9.24708 147.114 9.22294L144.796 9.17465C144.82 10.9855 144.82 13.1102 144.82 15.5971C144.82 17.6977 145.014 18.7842 146.8 18.7842H147.742C149.794 18.7842 152.619 18.5669 152.619 13.8346H152.788C152.716 16.4663 153.126 18.4945 153.633 19.2671L153.561 19.3395C152.861 19.3637 145.376 19.2188 142.72 19.2188C142.189 19.2188 141.682 19.2671 141.126 19.3395V19.1464Z"/><path d="M129.271 19.7258L121.955 4.22498V15.5971C121.955 17.3355 122.655 18.8566 124.297 19.1463V19.3395C122.051 19.1222 120.627 19.2429 119.299 19.3395V19.1463C120.699 18.8566 121.4 17.3355 121.4 15.5971V3.33163C120.072 1.30348 119.299 1.01374 118.575 0.699866V0.506709C120.579 0.651576 121.762 0.67572 122.897 0.530853L130.188 16.418L135.862 0.603287C137.311 0.651576 138.832 0.627432 140.281 0.506709V0.67572C138.977 0.868877 138.059 1.88295 138.059 4.03182V15.5971C138.059 17.3596 138.76 18.8566 139.677 19.1463V19.3395C138.832 19.2429 135.886 19.1222 133.882 19.3395V19.1463C135.283 18.8566 135.983 17.3355 135.983 15.5971V1.32762L129.44 19.7258H129.271Z"/><path d="M101.114 19.1709C102.66 18.7363 103.746 16.2494 105.291 11.9758L109.589 0.144929H109.758C116.06 17.9154 116.76 18.8328 118.402 19.1709V19.3399C116.036 19.1467 113.669 19.2916 111.569 19.3399V19.1709C113.79 18.7846 114.08 17.4807 111.496 10.9376L106.233 10.841C105.388 13.5452 105.026 15.1387 105.026 16.4667C105.026 18.8328 106.426 19.0501 107.295 19.1709V19.3399C105.219 19.2916 103.191 19.1709 101.114 19.3399V19.1709ZM106.329 10.5512L111.303 10.4547L108.647 3.74247C107.657 6.59154 106.909 8.78869 106.329 10.5512Z"/><path d="M94.7367 19.75C92.9983 19.75 92.105 19.2671 91.1875 18.591C91.6462 17.915 91.9118 16.7319 91.8152 14.414H92.0084C92.0084 17.915 94.6643 19.1946 96.2578 19.1946C98.4308 19.1946 99.0344 16.8043 99.0344 15.5971V4.24912C99.0344 2.51071 98.3343 0.9896 96.6924 0.699866V0.506709C98.2618 0.651576 101.207 0.67572 102.729 0.506709V0.699866C101.811 0.9896 101.111 2.51071 101.111 4.24912L101.111 13.8345C101.111 16.7802 98.962 19.75 94.7367 19.75Z"/><path d="M68.1439 19.1709C69.6891 18.7363 70.7756 16.2494 72.3209 11.9758L76.6186 0.144929H76.7876C83.0894 17.9154 83.7896 18.8328 85.4314 19.1709V19.3399C83.0652 19.1467 80.6991 19.2916 78.5985 19.3399V19.1709C80.8198 18.7846 81.1095 17.4807 78.526 10.9376L73.2625 10.841C72.4175 13.5452 72.0553 15.1387 72.0553 16.4667C72.0553 18.8328 73.4557 19.0501 74.3249 19.1709V19.3399C72.2484 19.2916 70.2203 19.1709 68.1439 19.3399V19.1709ZM73.3591 10.5512L78.3329 10.4547L75.677 3.74247C74.6871 6.59154 73.9386 8.78869 73.3591 10.5512Z"/><path d="M67.5024 19.4361C66.7539 19.1946 59.5588 19.2429 56.8788 19.2429C56.2993 19.2429 55.7923 19.2671 55.2611 19.3395V19.1463C56.5166 18.76 56.8788 16.6594 56.8788 15.5971V4.1284C56.8788 2.65558 56.251 1.01374 55.2611 0.699866V0.506709C56.1544 0.603287 59.1242 0.699866 61.1041 0.506709V0.699866C59.583 1.01374 58.9552 2.65558 58.9552 4.1284V15.5971C58.9552 17.6977 59.1725 18.8083 60.9351 18.8083H61.9008C63.6875 18.8083 66.4883 18.591 66.4883 13.8345H66.6815C66.609 16.4663 66.9954 18.5186 67.5507 19.3636L67.5024 19.4361Z"/><path d="M54.5473 19.4361C53.7988 19.1946 46.6037 19.2429 43.9237 19.2429C43.3442 19.2429 42.8372 19.2671 42.306 19.3395V19.1463C43.5615 18.76 43.9237 16.6594 43.9237 15.5971V4.1284C43.9237 2.65558 43.2959 1.01374 42.306 0.699866V0.506709C43.1993 0.603287 46.1691 0.699866 48.149 0.506709V0.699866C46.6279 1.01374 46.0001 2.65558 46.0001 4.1284V15.5971C46.0001 17.6977 46.2174 18.8083 47.98 18.8083H48.9457C50.7324 18.8083 53.5332 18.591 53.5332 13.8345H53.7264C53.6539 16.4663 54.0403 18.5186 54.5956 19.3636L54.5473 19.4361Z"/><path d="M28.7379 19.1464C30.0175 18.7601 30.3555 16.6353 30.3555 15.5971V4.15257C30.3555 2.67975 29.7278 1.01377 28.7379 0.699895V0.506738C29.2932 0.579172 29.8002 0.627461 32.3113 0.627461C34.6291 0.627461 38.8786 0.337725 40.9792 0.434304L41.0516 0.506738C40.3756 1.52081 40.1583 3.25922 40.2307 5.16665H40.0375C38.951 0.361871 36.1261 0.917197 32.5286 0.98963C32.4078 2.67975 32.4078 5.04592 32.4078 8.7159L34.7257 8.64347C35.9571 8.59518 37.9852 8.18472 38.3474 5.98756H38.5406C38.0818 7.96742 38.0818 9.92313 38.5406 11.8788H38.3474C37.9852 9.70583 35.9571 9.24708 34.7257 9.22294L32.4078 9.17465C32.432 10.9855 32.432 13.1102 32.432 15.5971C32.432 17.6977 32.6251 18.7842 34.4118 18.7842H35.3535C37.4058 18.7842 40.2307 18.5669 40.2307 13.8346H40.3997C40.3273 16.4663 40.7377 18.4945 41.2448 19.2671L41.1723 19.3395C40.4721 19.3637 32.9873 19.2188 30.3314 19.2188C29.8002 19.2188 29.2932 19.2671 28.7379 19.3395V19.1464Z"/><path d="M17.1408 19.1467C18.0583 18.857 18.7585 17.3359 18.7585 15.5975V4.17708C18.7585 2.0765 18.517 1.03829 16.8027 1.03829H16.3681C15.4024 1.03829 12.6016 1.25559 12.6016 6.01207H12.4084C12.4809 3.38031 12.0945 1.32802 11.5875 0.57954L11.6358 0.507105C12.336 0.482961 17.0683 0.603684 19.8208 0.603684C21.849 0.603684 27.3056 0.482961 28.0058 0.507105L28.0541 0.57954C27.5471 1.32802 27.1366 3.38031 27.2332 6.01207H27.04C27.04 1.25559 24.2151 1.03829 23.2735 1.03829H22.8389C21.0522 1.03829 20.8349 2.14894 20.8349 4.17708V15.5975C20.8349 17.3359 21.5351 18.857 22.4526 19.1467V19.3399C20.9315 19.1226 17.9858 19.2433 17.1408 19.3399V19.1467Z"/><path d="M4.65991 19.7503C2.72834 19.7503 0.917495 19.2674 0 18.5913C0.458747 17.9153 0.724338 16.7322 0.62776 14.4143H0.820916C0.845061 18.0602 4.49089 19.0984 6.39832 19.0984C8.86106 19.0984 9.77856 17.3117 9.77856 15.6216C9.77856 13.2071 7.94357 11.4928 5.74641 10.189C2.75248 8.42646 1.06236 6.9295 1.06236 4.58747C1.06236 2.31788 2.6559 0.120723 7.1468 0.120723C8.59548 0.120723 9.31981 0.36217 9.99586 0L10.0683 0.0724342C9.60955 0.748483 9.24738 2.55933 9.31981 4.9255H9.1508C8.76449 1.03822 6.9295 0.651904 5.5774 0.651904C3.76656 0.651904 2.51104 1.25552 2.51104 2.9215C2.51104 4.90135 4.32188 6.7122 6.61562 7.99186C10.2856 10.0924 11.3962 12.0482 11.3962 13.8349C11.3962 16.3217 9.63369 19.7503 4.65991 19.7503Z"/></svg></div>
-    <div class="ftr__legal">
-      <span>© 2025, Stella James Jewelry</span>
-      <div><a href="https://www.stella-james.com/policies/terms-of-use">Terms of Use</a><a href="https://www.stella-james.com/policies/terms-of-use">Privacy Statement</a></div>
-    </div>
+    <div class="ftr__legal"><span>© 2025, Stella James Jewelry</span>
+      <div><a href="https://www.stella-james.com/policies/terms-of-use">Terms of Use</a><a href="https://www.stella-james.com/policies/terms-of-use">Privacy Statement</a></div></div>
   </div>
 </footer>
 <script>
@@ -478,32 +333,13 @@ document.addEventListener('click',e=>{if(!hdr.contains(e.target))hdr.classList.r
 const dr=document.getElementById('drawer');
 document.getElementById('menuBtn').onclick=()=>dr.classList.add('open');
 document.getElementById('drawerClose').onclick=()=>dr.classList.remove('open');
+const ns=[...document.querySelectorAll('#note span')];let ni=0;setInterval(()=>{ns[ni].classList.remove('on');ni=(ni+1)%ns.length;ns[ni].classList.add('on')},3500);
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-const SHOP='https://cdn.shopify.com/s/files/1/0630/8931/1840/files/';const LETTERS=[{"l": "A", "s": "A-sml-1.jpg", "g": "A-lg-1.jpg", "ps": 2100, "pg": 2550}, {"l": "B", "s": "B-sml-1.jpg", "g": "B-lg-1.jpg", "ps": 2100, "pg": 2550}, {"l": "C", "s": "C-sml-1.jpg", "g": "C-sml-1.jpg", "ps": 2100, "pg": 2400}, {"l": "D", "s": "D-sml-2.jpg", "g": "D-lg-1.jpg", "ps": 2100, "pg": 2400}, {"l": "E", "s": "E-sml-1.jpg", "g": "E-lg-1.jpg", "ps": 2100, "pg": 2550}, {"l": "F", "s": "F-sml-1.jpg", "g": "F-lg-1.jpg", "ps": 2100, "pg": 2400}, {"l": "H", "s": "H-sml-1.jpg", "g": "H-lg-1.jpg", "ps": 2600, "pg": 3400}, {"l": "I", "s": "I-sml-1.jpg", "g": "I-lg-1.jpg", "ps": 1800, "pg": 2100}, {"l": "J", "s": "J-sml-1.jpg", "g": "J-sml-1.jpg", "ps": 1600, "pg": 2050}, {"l": "K", "s": "K-sml-1.jpg", "g": "K-lg-1.jpg", "ps": 2400, "pg": 3400}, {"l": "L", "s": "L-sml-1.jpg", "g": "L-lg-1.jpg", "ps": 1950, "pg": 2400}, {"l": "M", "s": "M-sml-1.jpg", "g": "M-lg-1.jpg", "ps": 2400, "pg": 3600}, {"l": "N", "s": "N-sml-1.jpg", "g": "N-lg.jpg", "ps": 2400, "pg": 3600}, {"l": "O", "s": "O-sml-1.jpg", "g": "O-lg.jpg", "ps": 2100, "pg": 2600}, {"l": "P", "s": "7.5mm_Letters_-_SM_-P_1.jpg", "g": "7.5mm_Letters_-_SM_-P_1_440ae9a7-3b9b-4ce1-9619-15409d4b6b4c.jpg", "ps": 1900, "pg": 3100}, {"l": "Q", "s": "H-sml-5_6d0d70be-a5da-4aad-b4f7-0f67cd8a0f79.jpg", "g": "Q-sml-5.jpg", "ps": 1900, "pg": 3100}, {"l": "R", "s": "R-sml-1.jpg", "g": "R-lg-2.jpg", "ps": 2100, "pg": 3200}, {"l": "S", "s": "S-sml-1.jpg", "g": "S-lg-1.jpg", "ps": 2100, "pg": 3100}, {"l": "T", "s": "T-sml-1.jpg", "g": "T-lg-1.jpg", "ps": 2100, "pg": 3100}, {"l": "U", "s": "U-sml-1.jpg", "g": "U-sml-1.jpg", "ps": 2300, "pg": 2900}, {"l": "V", "s": "V-sml-1.jpg", "g": "V-lg-1.jpg", "ps": 2400, "pg": 2900}, {"l": "W", "s": "W-sml-1.jpg", "g": "W-sml-1.jpg", "ps": 2400, "pg": 3600}, {"l": "X", "s": "X-sml-1.jpg", "g": "X-sml-1.jpg", "ps": 2400, "pg": 3300}, {"l": "Y", "s": "Y-sml-1.jpg", "g": "Y-sml-1.jpg", "ps": 2100, "pg": 2950}, {"l": "Z", "s": "Z-sml-1.jpg", "g": "Z-sml-1.jpg", "ps": 2400, "pg": 3300}, {"l": "Star", "s": "StarofDavid-sml-1.jpg", "g": "StarofDavid-sml-1.jpg", "ps": 1950, "pg": 2650}, {"l": "Heart", "s": "Heart-pendant-1.jpg", "g": "Heart-pendant-1.jpg", "ps": 2300, "pg": 2300}];
-// hero
-const media=[...document.querySelectorAll('.hero__media > *')],slides=[...document.querySelectorAll('.hero__slide')],bars=[...document.querySelectorAll('.hero__bars button')];
-let hi=0,ht;
-function go(n){hi=n;[media,slides,bars].forEach(g=>g.forEach((el,i)=>el.classList.toggle('on',i===n)));
-bars.forEach(b=>{const i=b.querySelector('i');i.style.animation='none';i.offsetWidth;i.style.animation=''});
-document.getElementById('heroNum').textContent='0'+(n+1)+' / 03';clearTimeout(ht);ht=setTimeout(()=>go((hi+1)%3),6500)}
-bars.forEach((b,i)=>b.onclick=()=>go(i));go(0);
-// letter studio
-let cur=0,size='s';const fmt=n=>'$'+n.toLocaleString('en-US')+'.00';
-const keys=document.getElementById('keys');
-LETTERS.forEach((d,i)=>{const b=document.createElement('button');b.textContent=d.l==='Star'?'✡':d.l==='Heart'?'♥':d.l;b.setAttribute('aria-label','Letter '+d.l);b.onclick=()=>{cur=i;render()};keys.appendChild(b)});
-const img=document.getElementById('dispImg');
-function render(){const d=LETTERS[cur];[...keys.children].forEach((b,i)=>b.classList.toggle('on',i===cur));
-img.style.opacity=0;setTimeout(()=>{img.src=SHOP+(size==='s'?d.s:d.g);img.alt='Love Letters pendant '+d.l;img.onload=()=>img.style.opacity=1},180);
-document.getElementById('glyph').textContent=d.l==='Star'?'✡':d.l==='Heart'?'♥':d.l;
-document.getElementById('dispName').textContent='Love Letters · '+d.l;
-document.getElementById('dispSize').textContent=(size==='s'?'7.5mm':'9mm')+' · 18k gold';
-document.getElementById('dispPrice').textContent=fmt(size==='s'?d.ps:d.pg);document.getElementById('dispLink').href='product.html?l='+d.l+'&s='+size}
-document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{size=b.dataset.size;document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x===b));render()});
-render();
-// collection index hover
-const cl=[...document.querySelectorAll('#cList a')],st=[...document.querySelectorAll('#cStage img')];
-cl.forEach(a=>a.addEventListener('mouseenter',()=>{const i=a.dataset.i;cl.forEach(x=>x.classList.toggle('on',x===a));st.forEach(s=>s.classList.toggle('on',s.dataset.i===i))}));
+
+const ms=[...document.querySelectorAll('.hero__m')],ts=[...document.querySelectorAll('.hero__t')],ds=[...document.querySelectorAll('#dots button')],dots=document.getElementById('dots');
+let hi=0,ht;function go(n){hi=n;[ms,ts,ds].forEach(g=>g.forEach((e,i)=>e.classList.toggle('on',i===n)));dots.classList.toggle('light',n>0);clearTimeout(ht);ht=setTimeout(()=>go((hi+1)%3),6500)}
+ds.forEach((d,i)=>d.onclick=()=>go(i));go(0);
 </script>
 </body>
 </html>
