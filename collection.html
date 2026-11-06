@@ -341,7 +341,7 @@ const glyph=l=>l==='Star'?'✡':l==='Heart'?'♥':l;
 const grid=document.getElementById('grid');
 function draw(){let list=LETTERS.map((d,i)=>({...d,i,p:size==='s'?d.ps:d.pg}));
 if(sort==='lo')list.sort((a,b)=>a.p-b.p||a.i-b.i);if(sort==='hi')list.sort((a,b)=>b.p-a.p||a.i-b.i);
-let h='';list.forEach((d,n)=>{h+=`<article class="card" id="L-${d.l}"><a href="${ITEM}" aria-label="Love Letters ${d.l}"><figure><img src="${SHOP+(size==='s'?d.s:d.g)}" alt="Love Letters diamond pendant ${d.l}" loading="lazy"><span class="card__letter">${glyph(d.l)}</span><span class="card__add">View pendant</span></figure></a><div class="card__meta"><div><h3>Love Letters · ${d.l}</h3><small>${size==='s'?'7.5mm':'9mm'}</small></div><strong>${fmt(d.p)}</strong></div></article>`;if(n===5)h+=FEATURE});
+let h='';list.forEach((d,n)=>{h+=`<article class="card" id="L-${d.l}"><a href="product.html?l=${d.l}&s=${size}" aria-label="Love Letters ${d.l}"><figure><img src="${SHOP+(size==='s'?d.s:d.g)}" alt="Love Letters diamond pendant ${d.l}" loading="lazy"><span class="card__letter">${glyph(d.l)}</span><span class="card__add">View pendant</span></figure></a><div class="card__meta"><div><h3>Love Letters · ${d.l}</h3><small>${size==='s'?'7.5mm':'9mm'}</small></div><strong>${fmt(d.p)}</strong></div></article>`;if(n===5)h+=FEATURE});
 grid.innerHTML=h;document.getElementById('count').textContent=list.length+' pieces · '+(size==='s'?'7.5mm':'9mm')}
 document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{size=b.dataset.size;document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x===b));draw()});
 document.getElementById('sort').onchange=e=>{sort=e.target.value;draw()};
