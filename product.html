@@ -245,7 +245,19 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 .gal{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .gal figure{background:#f9f9f9;overflow:hidden;aspect-ratio:3/4;position:relative}
 .gal figure:first-child{grid-column:1/-1;aspect-ratio:4/4.3}
-.gal img{width:100%;height:100%;object-fit:cover;transition:opacity .4s var(--ease)}
+.gal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gal img.in-img{opacity:0;transform:scale(1.04);transition:opacity .6s var(--ease),transform .9s var(--ease)}
+.gal img.in-img.show{opacity:1;transform:none}
+.gal img.out{opacity:0;transition:opacity .6s var(--ease)}
+.gal figure{transition:opacity .4s var(--ease),transform .5s var(--ease)}
+.gal figure.new{opacity:0;transform:translateY(16px)}
+.gal figure.loading::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.6) 50%,transparent 60%);background-size:200% 100%;animation:shim 1.2s linear infinite}
+@keyframes shim{from{background-position:120% 0}to{background-position:-80% 0}}
+.gal .tag{z-index:2;background:#fff;border-radius:999px;padding:.3rem .7rem}
+.gal .tag.flash{animation:pop .5s var(--ease)}
+#price.tick,#total.tick{animation:tick .5s var(--ease)}
+@keyframes tick{0%{opacity:.2;transform:translateY(6px)}100%{opacity:1;transform:none}}
+#price,#total{display:inline-block}
 .gal .tag{position:absolute;left:1rem;top:1rem;font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.66rem;color:var(--navy)}
 .buy{position:sticky;top:70px}
 .buy .lbl{color:var(--muted)}
@@ -538,6 +550,22 @@ document.querySelectorAll('#sz button').forEach(b=>b.onclick=()=>{size=b.dataset
 document.querySelectorAll('.chain').forEach(b=>b.onclick=()=>{ci=+b.dataset.c;len=0;render()});
 const galEl=document.getElementById('gal');
 const STY=['https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a34dc30e20abfd1daad943_Frame%201000005676.jpg','https://cdn.prod.website-files.com/67feb6a08999cd569428a723/689a479f002ebf409e5023c1_Instagram%201080x1350.jpg'];
+// smooth gallery: only changed photos crossfade, the rest stay put
+function swapImg(fig,url,alt){const cur=fig.querySelector('img:not(.out)');if(cur&&cur.getAttribute('src')===url){cur.alt=alt;return}
+ const ni=new Image();ni.alt=alt;ni.className='in-img';ni.decoding='async';
+ const done=()=>{fig.appendChild(ni);requestAnimationFrame(()=>{ni.classList.add('show');if(cur){cur.classList.add('out');setTimeout(()=>cur.remove(),600)}})};
+ ni.onload=done;ni.onerror=done;ni.src=url;fig.classList.add('loading');ni.addEventListener('load',()=>fig.classList.remove('loading'),{once:true})}
+function syncGal(ng,d,sz){const alt=i=>'Love Letters '+d.l+' '+sz+' image '+(i+1);
+ while(galEl.children.length<ng.length){const f=document.createElement('figure');f.className='new';galEl.appendChild(f);requestAnimationFrame(()=>f.classList.remove('new'))}
+ while(galEl.children.length>ng.length){const f=galEl.lastElementChild;f.classList.add('gone');setTimeout(()=>f.remove(),400);galEl.removeChild(f)}
+ const mainChanged=gal[0]!==ng[0];
+ [...galEl.children].forEach((f,i)=>swapImg(f,ng[i],alt(i)));
+ if(mainChanged&&gal.length&&matchMedia('(max-width:1000px)').matches)galEl.scrollTo({left:0,behavior:'smooth'});
+ let t=galEl.querySelector('.tag');if(!t){t=document.createElement('span');t.className='tag';galEl.children[0].appendChild(t)}
+ if(t.textContent!==sz){t.textContent=sz;t.classList.remove('flash');void t.offsetWidth;t.classList.add('flash')}
+ gal=ng}
+// preload both sizes of the current letter so switching is instant
+function preload(d){[d.s,d.g].forEach(f=>{const i=new Image();i.src=SHOP+f})}
 function render(){
  const d=LETTERS[li],base=size==='s'?d.ps:d.pg,sz=size==='s'?'7.5mm':'9mm';
  [...keys.children].forEach((b,i)=>b.classList.toggle('on',i===li));
@@ -557,9 +585,10 @@ function render(){
  document.title='Love Letters '+d.l+' ('+sz+') | Stella James';
  const main=SHOP+(size==='s'?d.s:d.g),third=(d.l==='A'||d.l==='B')?SHOP+d.l+'-lg-2.jpg':STY[0];
  const ng=[main,LIFE,third];if(ci>=0)ng.push(SHOP+'Frame'+(4+ci)+'.jpg',STY[1]);
- if(ng.join()!==gal.join()){gal=ng;galEl.innerHTML=gal.map((u,i)=>'<figure>'+(i===0?'<span class="tag">'+sz+'</span>':'')+'<img src="'+u+'" alt="Love Letters '+d.l+' image '+(i+1)+'"'+(i?' loading="lazy"':'')+'></figure>').join('')}
- else{const t=galEl.querySelector('.tag');if(t)t.textContent=sz}
- history.replaceState(null,'','?l='+d.l+'&s='+size);
+ syncGal(ng,d,sz);
+ history.replaceState(null,'','?l='+d.l+'&s='+size);preload(d);
+ // price change animation
+ ['price','total'].forEach(id=>{const e=document.getElementById(id);e.classList.remove('tick');void e.offsetWidth;e.classList.add('tick')});
 }
 render();
 // rail
