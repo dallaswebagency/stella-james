@@ -146,50 +146,145 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 
 
-.chd{padding:clamp(4rem,8vw,7rem) 0 clamp(2.5rem,4vw,3.5rem);text-align:center}
-.chd .crumb{font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.68rem;color:var(--muted);margin-bottom:1.6rem}
-.chd .crumb a:hover{color:var(--navy)}
-.chd h1{font-size:clamp(3rem,6vw,5.4rem)}
-.chd p{color:var(--muted);max-width:40rem;margin:1.4rem auto 0}
-.ctabs{display:flex;justify-content:center;gap:2.4rem;margin-top:2.6rem;font-family:var(--cond);text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--muted)}
-.ctabs a{padding-bottom:.4rem;border-bottom:1px solid transparent}
-.ctabs a.on,.ctabs a:hover{color:var(--navy);border-color:var(--navy)}
+/* hero */
+.ch{display:grid;grid-template-columns:1.05fr 1fr;min-height:calc(100vh - 46px);background:var(--soft);overflow:hidden}
+.ch__l{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,6vw,6rem) clamp(1.8rem,5vw,6rem);position:relative}
+.ch__crumb{font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.78rem;color:var(--muted);margin-bottom:2.4rem}
+.ch__crumb a:hover{color:var(--navy)}
+.ch h1{font-family:var(--serif);font-weight:400;text-transform:uppercase;font-size:clamp(3rem,6.4vw,6.6rem);line-height:.92;letter-spacing:.3px}
+.ch h1 span{display:block;overflow:hidden}
+.ch h1 span i{display:block;font-style:normal;transform:translateY(105%);animation:up 1.2s var(--ease) forwards}
+.ch h1 span:nth-child(2) i{animation-delay:.12s}
+@keyframes up{to{transform:none}}
+.ch__lead{font-family:var(--serif);font-size:clamp(1.3rem,2vw,1.7rem);margin:1.6rem 0 1rem;opacity:0;animation:fade 1s .5s forwards}
+.ch__body{max-width:31rem;opacity:0;animation:fade 1s .7s forwards}
+@keyframes fade{to{opacity:1}}
+.ch__glyph{position:absolute;right:clamp(1rem,4vw,4rem);top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:clamp(14rem,26vw,26rem);line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(36,37,119,.13);pointer-events:none;transition:opacity .5s}
+.ch__facts{display:flex;gap:2.6rem;margin-top:2.6rem;opacity:0;animation:fade 1s .9s forwards}
+.ch__facts b{display:block;font-family:var(--serif);font-weight:400;font-size:1.8rem;line-height:1}
+.ch__facts span{font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.72rem;color:var(--muted)}
+.ch__r{position:relative;overflow:hidden}
+.ch__r img.bg{position:absolute;inset:-6% 0;width:100%;height:112%;object-fit:cover;object-position:50% 30%;will-change:transform;animation:zoomout 2.4s var(--ease) both}
+@keyframes zoomout{from{transform:scale(1.18)}to{transform:scale(1)}}
+.ch__card{position:absolute;left:2rem;bottom:2rem;z-index:2;background:#fff;display:grid;grid-template-columns:86px 1fr;gap:1rem;align-items:center;padding:.7rem 1.4rem .7rem .7rem;box-shadow:0 20px 50px rgba(20,20,60,.18);opacity:0;transform:translateY(20px);animation:cardIn 1s 1.1s var(--ease) forwards}
+@keyframes cardIn{to{opacity:1;transform:none}}
+.ch__card img{width:86px;height:100px;object-fit:cover;background:#f8f8f8}
+.ch__card small{display:block;font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.7rem;color:var(--muted)}
+.ch__card b{font-family:var(--serif);font-weight:400;font-size:1.25rem;display:block}
+.ch__card a{font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.74rem;border-bottom:1px solid currentColor}
 
-.bar{position:sticky;top:46px;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.bar__in{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 0;font-family:var(--cond);text-transform:uppercase;letter-spacing:.16em;font-size:.7rem;color:var(--muted)}
-.sizes{display:flex;gap:1.8rem}
-.sizes button{padding-bottom:.3rem;border-bottom:1px solid transparent;transition:.3s}
-.sizes button.on{color:var(--navy);border-color:var(--navy)}
-.bar select{font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--ink);background:transparent;border:0;cursor:pointer;outline:none}
-.bar__r{display:flex;gap:2rem;align-items:center}
+/* alphabet rail */
+.abc{padding:3.2rem 0 2.6rem;border-bottom:1px solid var(--line)}
+.abc__hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.4rem}
+.abc__hd h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,2.4vw,2.1rem)}
+.abc__row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.2rem}
+.abc__row button{position:relative;font-family:var(--serif);font-size:clamp(1.6rem,2.6vw,2.6rem);line-height:1.2;padding:.1rem .35rem;color:rgba(36,37,119,.35);transition:color .3s,transform .3s var(--ease)}
+.abc__row button:hover,.abc__row button.on{color:var(--navy);transform:translateY(-4px)}
+.abc__row button::after{content:"";position:absolute;left:20%;right:20%;bottom:-2px;height:1px;background:var(--navy);transform:scaleX(0);transition:transform .3s}
+.abc__row button.on::after{transform:scaleX(1)}
+.abc__tip{position:absolute;bottom:115%;left:50%;width:110px;transform:translate(-50%,10px) scale(.9);opacity:0;pointer-events:none;background:#fff;box-shadow:0 14px 34px rgba(20,20,60,.16);padding:.4rem;transition:.35s var(--ease);z-index:5}
+.abc__tip img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.abc__tip span{display:block;font-family:var(--sans);font-size:.72rem;color:var(--navy);text-align:center;margin-top:.3rem}
+.abc__row button:hover .abc__tip{opacity:1;transform:translate(-50%,0) scale(1)}
 
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3.2rem 1.4rem;padding:3rem 0 clamp(5rem,9vw,8rem)}
-.card figure{position:relative;aspect-ratio:3/4;background:#f9f9f9;overflow:hidden}
-.card img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
-.card:hover img{transform:scale(1.04)}
+/* toolbar */
+.bar{position:sticky;top:46px;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar__in{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.9rem 0;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--navy);border-radius:999px;padding:3px}
+.seg button{font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.78rem;padding:.45rem 1.05rem;border-radius:999px;transition:.3s}
+.seg button.on{background:var(--navy);color:#fff}
+.bar__r{display:flex;gap:1.4rem;align-items:center;font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.78rem;color:var(--muted)}
+.bar select{font:inherit;color:var(--navy);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.5rem .9rem;cursor:pointer;outline:none}
+.view{display:flex;gap:.3rem}
+.view button{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:var(--muted);transition:.3s}
+.view button.on{background:var(--soft);color:var(--navy)}
+.view svg{width:16px;height:16px}
+.filter-chip{display:none;align-items:center;gap:.5rem;background:var(--soft);color:var(--navy);border-radius:999px;padding:.4rem .9rem}
+.filter-chip.show{display:inline-flex}
+
+/* grid + cards */
+.grid{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:3rem 1.4rem;padding:3rem 0 clamp(5rem,9vw,8rem)}
+.card{position:relative;opacity:0;transform:translateY(40px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.card.in{opacity:1;transform:none}
+.card__img{position:relative;aspect-ratio:3/4;background:#f8f8f8;overflow:hidden;perspective:900px}
+.card__tilt{position:absolute;inset:0;transition:transform .5s var(--ease);transform-style:preserve-3d}
+.card__tilt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .7s var(--ease),transform 1.4s var(--ease)}
+.card__tilt img.alt{opacity:0;transform:scale(1.1)}
+.card:hover .card__tilt img.main{opacity:0;transform:scale(1.06)}
+.card:hover .card__tilt img.alt{opacity:1;transform:scale(1)}
+.card__glyph{position:absolute;left:1rem;top:.6rem;font-family:var(--serif);font-size:3.4rem;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(36,37,119,.35);transition:transform .7s var(--ease),-webkit-text-stroke .4s;z-index:2;pointer-events:none}
+.card:hover .card__glyph{transform:translateY(-6px);-webkit-text-stroke:1px var(--navy)}
+.card__size{position:absolute;right:1rem;top:1rem;z-index:2;font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.7rem;background:#fff;border-radius:999px;padding:.3rem .7rem}
+.card__acts{position:absolute;left:1rem;right:1rem;bottom:1rem;z-index:2;display:flex;gap:.5rem;transform:translateY(140%);transition:transform .55s var(--ease)}
+.card:hover .card__acts,.card:focus-within .card__acts{transform:none}
+.card__acts button,.card__acts a{flex:1;text-align:center;font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.76rem;padding:.8rem;border-radius:999px;background:#fff;color:var(--navy);transition:background .3s,color .3s}
+.card__acts a{background:var(--navy);color:#fff}
+.card__acts button:hover{background:var(--navy);color:#fff}
+.card__shine{position:absolute;inset:0;z-index:1;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
+.card:hover .card__shine{transition:transform 1.1s var(--ease);transform:translateX(120%)}
 .card__meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:1rem}
-.card h3{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--navy)}
-.card small{display:block;font-family:var(--cond);text-transform:uppercase;letter-spacing:.16em;font-size:.66rem;color:var(--muted)}
-.card strong{font-weight:400;font-size:.92rem}
+.card h3{font-family:var(--serif);font-weight:400;font-size:1.35rem}
+.card small{display:block;font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.7rem;color:var(--muted)}
+.card strong{font-weight:400}
+.card.flash .card__img{outline:1px solid var(--navy);outline-offset:6px}
 
-.feature{grid-column:1/-1;display:grid;grid-template-columns:1.3fr 1fr;background:var(--soft);margin:1rem 0}
-.feature figure{aspect-ratio:4/3;overflow:hidden}
-.feature figure img{width:100%;height:100%;object-fit:cover}
-.feature div{display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,5vw,5rem)}
-.feature .lbl{color:var(--navy)}
-.feature h3{font-size:clamp(2rem,3.2vw,2.9rem);margin:1rem 0 1.2rem}
-.feature p{color:var(--muted);max-width:28rem}
+/* editorial tiles in grid */
+.tile{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4rem;margin:1rem 0;opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.tile.in{opacity:1;transform:none}
+.tile__look{position:relative;aspect-ratio:3/4;overflow:hidden;color:#fff}
+.tile__look img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
+.tile__look:hover img{transform:scale(1.07)}
+.tile__look::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(20,21,70,.6))}
+.tile__look span{position:absolute;left:1.3rem;bottom:1.2rem;z-index:2;font-family:var(--serif);font-size:1.7rem}
+.tile__look em{position:absolute;right:1.3rem;bottom:1.4rem;z-index:2;font-style:normal;font-family:var(--cond);font-weight:500;letter-spacing:.5px;font-size:.75rem}
+.tile__hd{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline}
+.tile__hd h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,2.8vw,2.6rem)}
+.vtile{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;background:var(--navy);color:#fff;margin:1rem 0;overflow:hidden;opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.vtile.in{opacity:1;transform:none}
+.vtile video{width:100%;height:100%;object-fit:cover;aspect-ratio:1}
+.vtile div{padding:clamp(2rem,5vw,5rem);display:flex;flex-direction:column;justify-content:center}
+.vtile h3{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.4vw,3.2rem);line-height:1.05;margin:1rem 0 1.2rem}
+.vtile p{color:rgba(255,255,255,.85);max-width:28rem}
 
-.explore{border-top:1px solid var(--line);padding:clamp(5rem,9vw,7rem) 0}
-.explore h2{font-size:clamp(2rem,3.2vw,2.8rem);margin-bottom:2.2rem}
-.explore__row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
-.explore__row figure{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--soft)}
-.explore__row img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .9s var(--ease)}
-.explore__row img.h{opacity:0}.explore__row a:hover img.h{opacity:1}
-.explore__row span{display:block;margin-top:1rem;font-family:var(--serif);font-weight:400;font-size:1.4rem;color:var(--navy)}
+/* quick view */
+.qv{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:rgba(20,21,70,.45);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:.4s}
+.qv.open{opacity:1;visibility:visible}
+.qv__box{width:min(940px,92vw);max-height:90vh;overflow:auto;background:#fff;display:grid;grid-template-columns:1fr 1fr;transform:translateY(30px) scale(.97);transition:transform .5s var(--ease)}
+.qv.open .qv__box{transform:none}
+.qv__img{background:#f8f8f8;aspect-ratio:3/4}
+.qv__img img{width:100%;height:100%;object-fit:cover}
+.qv__info{padding:clamp(1.6rem,4vw,3rem);display:flex;flex-direction:column;position:relative}
+.qv__close{position:absolute;top:1rem;right:1rem;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);font-size:1.1rem}
+.qv__info h3{font-family:var(--serif);font-weight:400;font-size:2.4rem;margin:.6rem 0 .4rem}
+.qv__price{font-size:1.15rem;margin-bottom:1.4rem}
+.qv__info p{font-size:.92rem;margin-bottom:1.6rem}
+.qv__info .seg{margin-bottom:1.8rem;align-self:flex-start}
+.qv__info .btn{margin-top:auto}
 
-@media (max-width:1000px){.grid{grid-template-columns:1fr 1fr;gap:2.4rem 1rem}.feature{grid-template-columns:1fr}.explore__row{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.bar__in{flex-wrap:wrap}.ctabs{gap:1.2rem}}
+/* explore */
+.explore{padding:clamp(5rem,9vw,7rem) 0;background:var(--soft)}
+.explore h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,3.4vw,3.2rem);margin-bottom:2.4rem}
+.ex{display:flex;gap:.7rem;height:clamp(380px,36vw,520px)}
+.ex a{position:relative;flex:1;overflow:hidden;color:#fff;transition:flex .9s var(--ease)}
+.ex a:hover{flex:2.2}
+.ex img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;transition:opacity .9s var(--ease),transform 1.8s var(--ease)}
+.ex img.h{opacity:0}
+.ex a:hover img.h{opacity:1}
+.ex a:hover img{transform:scale(1.05)}
+.ex a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(20,21,70,.55))}
+.ex span{position:absolute;left:1.4rem;bottom:1.3rem;z-index:2;font-family:var(--serif);font-size:1.8rem}
+.ex a.cur span::after{content:" · Viewing";font-family:var(--cond);font-size:.75rem;letter-spacing:.5px;text-transform:uppercase}
+
+@media (max-width:1000px){
+  .ch{grid-template-columns:1fr;min-height:auto}.ch__r{min-height:70vh}
+  .grid{--cols:2!important;gap:2.4rem 1rem}
+  .tile{grid-template-columns:1fr 1fr}.tile__look:nth-child(4){display:none}
+  .vtile,.qv__box{grid-template-columns:1fr}
+  .ex{flex-direction:column;height:auto}.ex a{height:260px;flex:none}.ex img.h{opacity:1}
+  .view{display:none}
+  .card__acts{transform:none}
+  .abc__row button{font-size:1.5rem}
+}
 </style>
 </head>
 <body>
@@ -222,19 +317,37 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
   <a href="https://www.stella-james.com/cart">Cart</a>
 </div>
 <main>
-<section class="wrap chd">
-  <div class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Love Letters</div>
-  <h1 class="ttl">Love Letters</h1>
-  <p>Your story, spelled in diamonds. Each initial in the Love Letters collection is hand-carved from a single lab-grown diamond and set in 18k gold, designed to honor the people and moments that matter most. Available in two sizes: 7.5mm and 9mm. These pendants can be worn solo or strung together to create a name, a word, or a quiet declaration of love.</p>
-  <nav class="ctabs" aria-label="Collections"><a href="collection.html" class=on>Love Letters</a><a href="https://www.stella-james.com/collections/love-letters-earrings">Earrings</a><a href="https://www.stella-james.com/collections/pendants">Pendants</a><a href="https://www.stella-james.com/collections/rings">Rings</a></nav>
+<section class="ch">
+  <div class="ch__l">
+    <span class="ch__glyph" id="glyph">A</span>
+    <div class="ch__crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Collections &nbsp;/&nbsp; Love Letters</div>
+    <h1><span><i>Love</i></span><span><i>Letters</i></span></h1>
+    <p class="ch__lead">Your story, spelled in diamonds.</p>
+    <p class="ch__body">Each initial in the Love Letters collection is hand-carved from a single lab-grown diamond and set in 18k gold, designed to honor the people and moments that matter most. Available in two sizes: 7.5mm and 9mm. These pendants can be worn solo or strung together to create a name, a word, or a quiet declaration of love.</p>
+    <div class="ch__facts"><div><b>27</b><span>Letters &amp; symbols</span></div><div><b>18k</b><span>Gold setting</span></div><div><b>2</b><span>Sizes</span></div></div>
+  </div>
+  <div class="ch__r">
+    <img class="bg" id="chBg" src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a89358159361ad6c300553_SJ_MAISONLOTAN_007.jpg" alt="Model wearing Love Letters pendants">
+    <div class="ch__card"><img id="chCardImg" src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/A-sml-1.jpg" alt=""><div><small>Featured letter</small><b id="chCardName">Love Letters · A</b><a id="chCardLink" href="product.html?l=A&s=s">View pendant</a></div></div>
+  </div>
 </section>
+
+<section class="wrap abc">
+  <div class="abc__hd"><h2>Shop by letter</h2><span class="lbl" id="abcHint">Hover to preview, click to find it</span></div>
+  <div class="abc__row" id="abc"></div>
+</section>
+
 <div class="bar"><div class="wrap bar__in">
-  <div class="sizes" id="sizes"><button class="on" data-size="s">Small (7.5mm)</button><button data-size="g">Large (9mm)</button></div>
-  <div class="bar__r"><span id="count">27 pieces</span>
-    <select id="sort" aria-label="Sort"><option value="az">Sort: A to Z</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select></div>
+  <div class="seg" id="sizes"><button class="on" data-size="s">Small · 7.5mm</button><button data-size="g">Large · 9mm</button></div>
+  <div class="bar__r">
+    <span class="filter-chip" id="chip"></span>
+    <span id="count">27 pieces</span>
+    <select id="sort" aria-label="Sort"><option value="az">A to Z</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option></select>
+    <div class="view"><button class="on" data-c="3" aria-label="3 per row"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg></button><button data-c="4" aria-label="4 per row"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="3" height="3"/><rect x="6.5" y="1" width="3" height="3"/><rect x="12" y="1" width="3" height="3"/><rect x="1" y="6.5" width="3" height="3"/><rect x="6.5" y="6.5" width="3" height="3"/><rect x="12" y="6.5" width="3" height="3"/><rect x="1" y="12" width="3" height="3"/><rect x="6.5" y="12" width="3" height="3"/><rect x="12" y="12" width="3" height="3"/></svg></button></div>
+  </div>
 </div></div>
 <section class="wrap grid" id="grid" aria-label="Love Letters pendants"></section>
-<section class="explore"><div class="wrap"><h2 class="ttl">Explore All Collections</h2><div class="explore__row"><a href="collection.html"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e5ffd338da9433b5fbe_Stella_James.jpg" alt="Love Letters" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef5061128176_SJ_MAISONLOTAN.jpeg" alt="" loading="lazy"></figure><span>Love Letters</span></a><a href="https://www.stella-james.com/collections/love-letters-earrings"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e648b2465bb9ddbdce3_Stella_James%20(1).jpg" alt="Earrings" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/68acb1cdfa884b5296065c97_Media_Frame_16_9.jpeg" alt="" loading="lazy"></figure><span>Earrings</span></a><a href="https://www.stella-james.com/collections/pendants"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e587c04ca1f651a7e28_Stella_James%20(2).jpg" alt="Pendants" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef5061128160_Stella_James_MAISONLOTAN_014115.jpeg" alt="" loading="lazy"></figure><span>Pendants</span></a><a href="https://www.stella-james.com/collections/rings"><figure><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e915b7e42f365821ee1_Stella_James.jpg" alt="Rings" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef506112815a_image_289.jpeg" alt="" loading="lazy"></figure><span>Rings</span></a></div></div></section>
+<section class="explore"><div class="wrap"><h2 class="rv">Explore All Collections</h2><div class="ex"><a href="collection.html" class=cur><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e5ffd338da9433b5fbe_Stella_James.jpg" alt="Love Letters" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef5061128176_SJ_MAISONLOTAN.jpeg" alt="" loading="lazy"><span>Love Letters</span></a><a href="https://www.stella-james.com/collections/love-letters-earrings"><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e648b2465bb9ddbdce3_Stella_James%20(1).jpg" alt="Earrings" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/68acb1cdfa884b5296065c97_Media_Frame_16_9.jpeg" alt="" loading="lazy"><span>Earrings</span></a><a href="https://www.stella-james.com/collections/pendants"><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e587c04ca1f651a7e28_Stella_James%20(2).jpg" alt="Pendants" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef5061128160_Stella_James_MAISONLOTAN_014115.jpeg" alt="" loading="lazy"><span>Pendants</span></a><a href="https://www.stella-james.com/collections/rings"><img src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/69851e915b7e42f365821ee1_Stella_James.jpg" alt="Rings" loading="lazy"><img class="h" src="https://cdn.prod.website-files.com/6800032555e25721a3be6721/6ab901d832a2ef506112815a_image_289.jpeg" alt="" loading="lazy"><span>Rings</span></a></div></div></section>
 <section class="gn wrap">
   <div class="gn__guide rvi">
     <img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/689a479f002ebf409e5023c1_Instagram%201080x1350.jpg" alt="Love Letters pendants layered" loading="lazy">
@@ -278,7 +391,16 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
     <div class="ftr__legal"><span>© 2025, Stella James Jewelry</span><a href="https://www.stella-james.com/policies/terms-of-use">Terms of Use</a><a href="https://www.stella-james.com/policies/terms-of-use">Privacy Statement</a><a href="http://www.maisonlotan.com/" target="_blank" rel="noopener">Design by Maison Lotan</a></div>
   </div>
 </footer>
-<template id="feat"><article class="feature"><figure><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a89358159361ad6c300553_SJ_MAISONLOTAN_007.jpg" alt="Model wearing Love Letters pendants" loading="lazy"></figure><div><span class="lbl">In delicate type</span><h3 class="ttl">Cut From a Single Solid Diamond</h3><p>Each Love Letter is cut from a single, solid lab-grown diamond using a first-of-its-kind technique. This innovation optimizes the stone’s surface to create a seamless, custom shape set in 18k gold—maximizing brilliance, strength, and meaning.</p></div></article></template><script>
+
+<div class="qv" id="qv" aria-hidden="true"><div class="qv__box" role="dialog" aria-label="Quick view">
+  <div class="qv__img"><img id="qvImg" src="" alt=""></div>
+  <div class="qv__info"><button class="qv__close" id="qvClose" aria-label="Close">×</button>
+    <span class="lbl">Pendants · Love Letters</span><h3 id="qvName"></h3><div class="qv__price" id="qvPrice"></div>
+    <p>Each Love Letters pendant is cut by hand and crafted in radiant 18K yellow or white gold, then meticulously hand-set with lab-grown diamonds.</p>
+    <div class="seg" id="qvSeg"><button data-s="s">7.5mm</button><button data-s="g">9mm</button></div>
+    <a class="btn" id="qvGo" href="#">View full details</a></div>
+</div></div>
+<template id="tileT"><div class="tile"><div class="tile__hd"><h3>How to style it</h3><span class="lbl">It’s a story you wear</span></div><a class="tile__look" href="product.html?l=A&s=s"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a34dc30e20abfd1daad943_Frame%201000005676.jpg" alt="One Letter" loading="lazy"><span>One Letter</span><em>Shop the look →</em></a><a class="tile__look" href="product.html?l=A&s=s"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a34dab0ac6d9babefb2820_Frame%201000005677.jpg" alt="Two Letters" loading="lazy"><span>Two Letters</span><em>Shop the look →</em></a><a class="tile__look" href="product.html?l=A&s=s"><img src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/68a34db8ab678e661616e0ce_Frame%201000005675.jpg" alt="Three Letters" loading="lazy"><span>Three Letters</span><em>Shop the look →</em></a></div></template><template id="vtileT"><div class="vtile"><video autoplay muted loop playsinline poster="https://cdn.prod.website-files.com/67feb6a08999cd569428a723/687924ad013d29cc1950becf_SJ-Home%20Hero-Letter%20A-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723%2F687924ad013d29cc1950becf_SJ-Home%20Hero-Letter%20A-transcode.webm" type="video/webm"><source src="https://cdn.prod.website-files.com/67feb6a08999cd569428a723%2F687924ad013d29cc1950becf_SJ-Home%20Hero-Letter%20A-transcode.mp4" type="video/mp4"></video><div><span class="lbl" style="color:#FFDADA">In delicate type</span><h3>Cut From a Single Solid Diamond</h3><p>Each Love Letter is cut from a single, solid lab-grown diamond using a first-of-its-kind technique. This innovation optimizes the stone’s surface to create a seamless, custom shape set in 18k gold—maximizing brilliance, strength, and meaning.</p></div></div></template><script>
 const hdr=document.getElementById('hdr'),shopBtn=document.getElementById('shopBtn');
 shopBtn.addEventListener('click',e=>{e.stopPropagation();const o=hdr.classList.toggle('shop-open');shopBtn.setAttribute('aria-expanded',o)});
 hdr.addEventListener('mouseleave',()=>{hdr.classList.remove('shop-open');shopBtn.setAttribute('aria-expanded',false)});
@@ -291,15 +413,47 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll(':scope > .rvi').forEach(c=>c.classList.add('in'));io2.unobserve(e.target)}}),{threshold:.08});
 document.querySelectorAll('.rvi').forEach(el=>io2.observe(el.parentElement));
 const SHOP='https://cdn.shopify.com/s/files/1/0630/8931/1840/files/';const LETTERS=[{"l": "A", "s": "A-sml-1.jpg", "g": "A-lg-1.jpg", "ps": 2100, "pg": 2550}, {"l": "B", "s": "B-sml-1.jpg", "g": "B-lg-1.jpg", "ps": 2100, "pg": 2550}, {"l": "C", "s": "C-sml-1.jpg", "g": "C-sml-1.jpg", "ps": 2100, "pg": 2400}, {"l": "D", "s": "D-sml-2.jpg", "g": "D-lg-1.jpg", "ps": 2100, "pg": 2400}, {"l": "E", "s": "E-sml-1.jpg", "g": "E-lg-1.jpg", "ps": 2100, "pg": 2550}, {"l": "F", "s": "F-sml-1.jpg", "g": "F-lg-1.jpg", "ps": 2100, "pg": 2400}, {"l": "H", "s": "H-sml-1.jpg", "g": "H-lg-1.jpg", "ps": 2600, "pg": 3400}, {"l": "I", "s": "I-sml-1.jpg", "g": "I-lg-1.jpg", "ps": 1800, "pg": 2100}, {"l": "J", "s": "J-sml-1.jpg", "g": "J-sml-1.jpg", "ps": 1600, "pg": 2050}, {"l": "K", "s": "K-sml-1.jpg", "g": "K-lg-1.jpg", "ps": 2400, "pg": 3400}, {"l": "L", "s": "L-sml-1.jpg", "g": "L-lg-1.jpg", "ps": 1950, "pg": 2400}, {"l": "M", "s": "M-sml-1.jpg", "g": "M-lg-1.jpg", "ps": 2400, "pg": 3600}, {"l": "N", "s": "N-sml-1.jpg", "g": "N-lg.jpg", "ps": 2400, "pg": 3600}, {"l": "O", "s": "O-sml-1.jpg", "g": "O-lg.jpg", "ps": 2100, "pg": 2600}, {"l": "P", "s": "7.5mm_Letters_-_SM_-P_1.jpg", "g": "7.5mm_Letters_-_SM_-P_1_440ae9a7-3b9b-4ce1-9619-15409d4b6b4c.jpg", "ps": 1900, "pg": 3100}, {"l": "Q", "s": "H-sml-5_6d0d70be-a5da-4aad-b4f7-0f67cd8a0f79.jpg", "g": "Q-sml-5.jpg", "ps": 1900, "pg": 3100}, {"l": "R", "s": "R-sml-1.jpg", "g": "R-lg-2.jpg", "ps": 2100, "pg": 3200}, {"l": "S", "s": "S-sml-1.jpg", "g": "S-lg-1.jpg", "ps": 2100, "pg": 3100}, {"l": "T", "s": "T-sml-1.jpg", "g": "T-lg-1.jpg", "ps": 2100, "pg": 3100}, {"l": "U", "s": "U-sml-1.jpg", "g": "U-sml-1.jpg", "ps": 2300, "pg": 2900}, {"l": "V", "s": "V-sml-1.jpg", "g": "V-lg-1.jpg", "ps": 2400, "pg": 2900}, {"l": "W", "s": "W-sml-1.jpg", "g": "W-sml-1.jpg", "ps": 2400, "pg": 3600}, {"l": "X", "s": "X-sml-1.jpg", "g": "X-sml-1.jpg", "ps": 2400, "pg": 3300}, {"l": "Y", "s": "Y-sml-1.jpg", "g": "Y-sml-1.jpg", "ps": 2100, "pg": 2950}, {"l": "Z", "s": "Z-sml-1.jpg", "g": "Z-sml-1.jpg", "ps": 2400, "pg": 3300}, {"l": "Star", "s": "StarofDavid-sml-1.jpg", "g": "StarofDavid-sml-1.jpg", "ps": 1950, "pg": 2650}, {"l": "Heart", "s": "Heart-pendant-1.jpg", "g": "Heart-pendant-1.jpg", "ps": 2300, "pg": 2300}];
-const FEATURE=document.getElementById('feat').innerHTML;
-let size='s',sort='az';const fmt=n=>'$'+n.toLocaleString('en-US')+'.00';
+const TILE=document.getElementById('tileT').innerHTML,VTILE=document.getElementById('vtileT').innerHTML;
+let size='s',sort='az',only=null;const fmt=n=>'$'+n.toLocaleString('en-US')+'.00';
+const G=l=>l==='Star'?'✡':l==='Heart'?'♡':l;
 const grid=document.getElementById('grid');
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');cio.unobserve(e.target)}}),{threshold:.08});
 function draw(){let list=LETTERS.map((d,i)=>({...d,i,p:size==='s'?d.ps:d.pg}));
-if(sort==='lo')list.sort((a,b)=>a.p-b.p||a.i-b.i);if(sort==='hi')list.sort((a,b)=>b.p-a.p||a.i-b.i);
-let h='';list.forEach((d,n)=>{h+=`<a class="card" href="product.html?l=${d.l}&s=${size}"><figure><img src="${SHOP+(size==='s'?d.s:d.g)}" alt="Love Letters diamond pendant ${d.l}" loading="lazy"></figure><div class="card__meta"><div><h3>Love Letters · ${d.l}</h3><small>${size==='s'?'7.5mm':'9mm'} · 18k gold</small></div><strong>${fmt(d.p)}</strong></div></a>`;if(n===8)h+=FEATURE});
-grid.innerHTML=h;document.getElementById('count').textContent=list.length+' pieces'}
-document.querySelectorAll('#sizes button').forEach(b=>b.onclick=()=>{size=b.dataset.size;document.querySelectorAll('#sizes button').forEach(x=>x.classList.toggle('on',x===b));draw()});
-document.getElementById('sort').onchange=e=>{sort=e.target.value;draw()};
+ if(sort==='lo')list.sort((a,b)=>a.p-b.p||a.i-b.i);if(sort==='hi')list.sort((a,b)=>b.p-a.p||a.i-b.i);
+ let h='';list.forEach((d,n)=>{const main=size==='s'?d.s:d.g,alt=size==='s'?d.g:d.s;
+  h+=`<article class="card" id="L-${d.l}" data-i="${d.i}" style="transition-delay:${(n%4)*.07}s"><div class="card__img"><a class="card__tilt" href="product.html?l=${d.l}&s=${size}" aria-label="Love Letters ${d.l}"><img class="main" src="${SHOP+main}" alt="Love Letters diamond pendant ${d.l}" loading="lazy"><img class="alt" src="${SHOP+(alt===main?'Stella_James_MAISONLOTAN_014.jpg':alt)}" alt="" loading="lazy"></a><span class="card__shine"></span><span class="card__glyph">${G(d.l)}</span><span class="card__size">${size==='s'?'7.5mm':'9mm'}</span><div class="card__acts"><button data-qv="${d.i}">Quick view</button><a href="product.html?l=${d.l}&s=${size}">Shop</a></div></div><div class="card__meta"><div><h3>Love Letters · ${d.l}</h3><small>18k gold · lab-grown diamond</small></div><strong>${fmt(d.p)}</strong></div></article>`;
+  if(n===5)h+=TILE;if(n===14)h+=VTILE});
+ grid.innerHTML=h;document.getElementById('count').textContent=list.length+' pieces';
+ grid.querySelectorAll('.card,.tile,.vtile').forEach(el=>cio.observe(el));
+ grid.querySelectorAll('.card__img').forEach(c=>{const t=c.querySelector('.card__tilt');
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform=`rotateY(${x*7}deg) rotateX(${-y*7}deg) scale(1.02)`});
+  c.addEventListener('mouseleave',()=>t.style.transform='')});
+ grid.querySelectorAll('[data-qv]').forEach(b=>b.onclick=()=>openQV(+b.dataset.qv));
+ if(only){const c=document.getElementById('L-'+only);if(c){c.scrollIntoView({behavior:'smooth',block:'center'});c.classList.add('flash');setTimeout(()=>c.classList.remove('flash'),1800)}}}
+document.querySelectorAll('#sizes button').forEach(b=>b.onclick=()=>{size=b.dataset.size;document.querySelectorAll('#sizes button').forEach(x=>x.classList.toggle('on',x===b));only=null;draw()});
+document.getElementById('sort').onchange=e=>{sort=e.target.value;only=null;draw()};
+document.querySelectorAll('.view button').forEach(b=>b.onclick=()=>{grid.style.setProperty('--cols',b.dataset.c);document.querySelectorAll('.view button').forEach(x=>x.classList.toggle('on',x===b))});
+// alphabet rail with previews
+const abc=document.getElementById('abc'),chip=document.getElementById('chip');
+LETTERS.forEach(d=>{const b=document.createElement('button');b.innerHTML=G(d.l)+'<span class="abc__tip"><img src="'+SHOP+d.s+'" alt="" loading="lazy"><span>'+fmt(d.ps)+'</span></span>';b.setAttribute('aria-label','Find letter '+d.l);
+ b.onclick=()=>{only=d.l;abc.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));chip.textContent='Letter '+d.l;chip.classList.add('show');draw()};
+ b.onmouseenter=()=>setFeatured(d);abc.appendChild(b)});
+// hero featured letter cycles
+const glyph=document.getElementById('glyph');let fi=0;
+function setFeatured(d){glyph.style.opacity=0;setTimeout(()=>{glyph.textContent=G(d.l);glyph.style.opacity=1},250);
+ document.getElementById('chCardImg').src=SHOP+d.s;document.getElementById('chCardName').textContent='Love Letters · '+d.l;document.getElementById('chCardLink').href='product.html?l='+d.l+'&s=s'}
+setInterval(()=>{fi=(fi+1)%LETTERS.length;setFeatured(LETTERS[fi])},2600);
+// hero parallax
+const bg=document.getElementById('chBg');addEventListener('scroll',()=>{if(scrollY<innerHeight)bg.style.transform='translateY('+(scrollY*.12)+'px)'},{passive:true});
+// quick view
+const qv=document.getElementById('qv');let qd=null,qs='s';
+function openQV(i){qd=LETTERS[i];qs=size;renderQV();qv.classList.add('open');qv.setAttribute('aria-hidden','false')}
+function renderQV(){document.getElementById('qvImg').src=SHOP+(qs==='s'?qd.s:qd.g);document.getElementById('qvName').textContent='Love Letters · '+qd.l;
+ document.getElementById('qvPrice').textContent=fmt(qs==='s'?qd.ps:qd.pg);document.getElementById('qvGo').href='product.html?l='+qd.l+'&s='+qs;
+ document.querySelectorAll('#qvSeg button').forEach(b=>b.classList.toggle('on',b.dataset.s===qs))}
+document.querySelectorAll('#qvSeg button').forEach(b=>b.onclick=()=>{qs=b.dataset.s;renderQV()});
+const closeQV=()=>{qv.classList.remove('open');qv.setAttribute('aria-hidden','true')};
+document.getElementById('qvClose').onclick=closeQV;qv.addEventListener('click',e=>{if(e.target===qv)closeQV()});addEventListener('keydown',e=>{if(e.key==='Escape')closeQV()});
 draw();
 </script>
 </body>
