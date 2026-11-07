@@ -198,6 +198,15 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
 .faq__q[open] div{grid-template-rows:1fr}
 .faq__q div p{overflow:hidden;min-height:0;padding-bottom:1.3rem;max-width:40rem}
 
+/* product hover swap: second photo zooms into the diamond letter */
+.hs{position:relative;overflow:hidden}
+.hs img{transition:opacity .6s var(--ease),transform 1.2s var(--ease)}
+.hs .h1{position:relative}
+.hs .h2{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.25);transform-origin:50% 78%}
+a:hover > .hs .h1,.hs:hover .h1,a:focus-visible > .hs .h1{opacity:0}
+a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:scale(1.7)}
+@media (hover:none){.hs .h2{display:none}}
+
 /* accessibility */
 :focus-visible{outline:2px solid var(--navy);outline-offset:3px}
 .hdr :focus-visible,.ftr :focus-visible,.gn__guide :focus-visible{outline-color:#fff}
@@ -318,7 +327,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
 .rail a{scroll-snap-align:start}
 .rail figure{aspect-ratio:3/4;background:#f9f9f9;overflow:hidden}
 .rail img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.rail a:hover img{transform:scale(1.04)}
+
 .rail div{display:flex;justify-content:space-between;margin-top:.9rem}
 .rail h3{font-family:var(--serif);font-weight:400;font-size:1.25rem;color:var(--navy)}
 .rail strong{font-weight:400;font-size:.9rem}
@@ -555,7 +564,7 @@ function render(){
 render();
 // rail
 const rail=document.getElementById('rail');
-rail.innerHTML=LETTERS.map(d=>'<a href="?l='+d.l+'&s=s" data-l="'+d.l+'"><figure><img src="'+SHOP+d.s+'" alt="Love Letters '+d.l+'" loading="lazy"></figure><div><h3>Love Letters · '+d.l+'</h3><strong>'+fmt(d.ps)+'</strong></div></a>').join('');
+rail.innerHTML=LETTERS.map(d=>'<a href="?l='+d.l+'&s=s" data-l="'+d.l+'"><figure class="hs"><img class="h1" src="'+SHOP+d.s+'" alt="Love Letters '+d.l+'" loading="lazy"><img class="h2" src="'+SHOP+d.g+'" alt="" loading="lazy"></figure><div><h3>Love Letters · '+d.l+'</h3><strong>'+fmt(d.ps)+'</strong></div></a>').join('');
 rail.querySelectorAll('a').forEach(a=>a.onclick=e=>{e.preventDefault();li=LETTERS.findIndex(d=>d.l===a.dataset.l);size='s';gi=0;render();window.scrollTo({top:0,behavior:'smooth'})});
 document.getElementById('rPrev').onclick=()=>rail.scrollBy({left:-rail.clientWidth*.8,behavior:'smooth'});
 document.getElementById('rNext').onclick=()=>rail.scrollBy({left:rail.clientWidth*.8,behavior:'smooth'});

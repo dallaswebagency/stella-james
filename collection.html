@@ -198,6 +198,15 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
 .faq__q[open] div{grid-template-rows:1fr}
 .faq__q div p{overflow:hidden;min-height:0;padding-bottom:1.3rem;max-width:40rem}
 
+/* product hover swap: second photo zooms into the diamond letter */
+.hs{position:relative;overflow:hidden}
+.hs img{transition:opacity .6s var(--ease),transform 1.2s var(--ease)}
+.hs .h1{position:relative}
+.hs .h2{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.25);transform-origin:50% 78%}
+a:hover > .hs .h1,.hs:hover .h1,a:focus-visible > .hs .h1{opacity:0}
+a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:scale(1.7)}
+@media (hover:none){.hs .h2{display:none}}
+
 /* accessibility */
 :focus-visible{outline:2px solid var(--navy);outline-offset:3px}
 .hdr :focus-visible,.ftr :focus-visible,.gn__guide :focus-visible{outline-color:#fff}
@@ -294,9 +303,9 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
 .card__img{position:relative;aspect-ratio:3/4;background:#f8f8f8;overflow:hidden;perspective:900px}
 .card__tilt{position:absolute;inset:0;transition:transform .5s var(--ease);transform-style:preserve-3d}
 .card__tilt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .7s var(--ease),transform 1.4s var(--ease)}
-.card__tilt img.alt{opacity:0;transform:scale(1.1)}
+.card__tilt img.alt{opacity:0;transform:scale(1.25);transform-origin:50% 78%}
 .card:hover .card__tilt img.main{opacity:0;transform:scale(1.06)}
-.card:hover .card__tilt img.alt{opacity:1;transform:scale(1)}
+.card:hover .card__tilt img.alt{opacity:1;transform:scale(1.7)}
 .card__glyph{position:absolute;left:1rem;top:.6rem;font-family:var(--serif);font-size:3.4rem;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(36,37,119,.35);transition:transform .7s var(--ease),-webkit-text-stroke .4s;z-index:2;pointer-events:none}
 .card:hover .card__glyph{transform:translateY(-6px);-webkit-text-stroke:1px var(--navy)}
 .card__size{position:absolute;right:1rem;top:1rem;z-index:2;font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.7rem;background:#fff;border-radius:999px;padding:.3rem .7rem}
@@ -624,7 +633,7 @@ const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.tar
 function draw(){let list=LETTERS.map((d,i)=>({...d,i,p:size==='s'?d.ps:d.pg}));
  if(sort==='lo')list.sort((a,b)=>a.p-b.p||a.i-b.i);if(sort==='hi')list.sort((a,b)=>b.p-a.p||a.i-b.i);
  let h='';list.forEach((d,n)=>{const main=size==='s'?d.s:d.g,alt=size==='s'?d.g:d.s;
-  h+=`<article class="card" id="L-${d.l}" data-i="${d.i}" style="transition-delay:${(n%4)*.07}s"><div class="card__img"><a class="card__tilt" href="product.html?l=${d.l}&s=${size}" aria-label="Love Letters ${d.l}"><img class="main" src="${SHOP+main}" alt="Love Letters diamond pendant ${d.l}" loading="lazy"><img class="alt" src="${SHOP+(alt===main?'Stella_James_MAISONLOTAN_014.jpg':alt)}" alt="" loading="lazy"></a><span class="card__shine"></span><span class="card__glyph">${G(d.l)}</span><span class="card__size">${size==='s'?'7.5mm':'9mm'}</span><div class="card__acts"><button data-qv="${d.i}">Quick view</button><a href="product.html?l=${d.l}&s=${size}">Shop</a></div></div><div class="card__meta"><div><h3>Love Letters · ${d.l}</h3><small>18k gold · lab-grown diamond</small></div><strong>${fmt(d.p)}</strong></div></article>`;
+  h+=`<article class="card" id="L-${d.l}" data-i="${d.i}" style="transition-delay:${(n%4)*.07}s"><div class="card__img"><a class="card__tilt" href="product.html?l=${d.l}&s=${size}" aria-label="Love Letters ${d.l}"><img class="main" src="${SHOP+main}" alt="Love Letters diamond pendant ${d.l}" loading="lazy"><img class="alt" src="${SHOP+alt}" alt="" loading="lazy"></a><span class="card__shine"></span><span class="card__glyph">${G(d.l)}</span><span class="card__size">${size==='s'?'7.5mm':'9mm'}</span><div class="card__acts"><button data-qv="${d.i}">Quick view</button><a href="product.html?l=${d.l}&s=${size}">Shop</a></div></div><div class="card__meta"><div><h3>Love Letters · ${d.l}</h3><small>18k gold · lab-grown diamond</small></div><strong>${fmt(d.p)}</strong></div></article>`;
   if(n===5)h+=TILE;if(n===14)h+=VTILE});
  grid.innerHTML=h;document.getElementById('count').textContent=list.length+' pieces';
  grid.querySelectorAll('.card,.tile,.vtile').forEach(el=>cio.observe(el));
