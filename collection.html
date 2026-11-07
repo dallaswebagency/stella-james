@@ -677,7 +677,7 @@ bChain.querySelectorAll('button').forEach(b=>b.onclick=()=>{B.chain=+b.dataset.c
 [['bSize','size'],['bGold','gold']].forEach(([id,k])=>document.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{B[k]=b.dataset.v;document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.toggle('on',x===b));bRender(false)}));
 function bRender(anim=true){const n=B.sel.length,pv=document.getElementById('bPv'),W=pv.clientWidth,H=pv.clientHeight;
  const L=bPath.getTotalLength();let tot=0;
- bPend.innerHTML=B.sel.map((i,k)=>{const d=LETTERS[i];tot+=B.size==='s'?d.ps:d.pg;const t=n===1?.5:.32+.36*k/(n-1),pt=bPath.getPointAtLength(L*t);
+ bPend.innerHTML=B.sel.map((i,k)=>{const d=LETTERS[i];tot+=B.size==='s'?d.ps:d.pg;const t=n===1?.5:(n===2?.36:.2)+(n===2?.28:.6)*k/(n-1),pt=bPath.getPointAtLength(L*t);
   return '<div class="bld__p" style="left:'+(pt.x/600*100)+'%;top:'+(pt.y/460*H-4)+'px;'+(anim?'':'animation:none')+'"><img src="'+SHOP+(B.size==='s'?d.s:d.g)+'" alt="Love Letters '+d.l+'"><span>'+G(d.l)+'</span><button data-k="'+k+'" aria-label="Remove '+d.l+'">×</button></div>'}).join('');
  bPend.querySelectorAll('button').forEach(b=>b.onclick=()=>{B.sel.splice(+b.dataset.k,1);bRender(false)});
  if(B.chain>=0)tot+=CHAINS[B.chain].opts[B.len][2];
