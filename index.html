@@ -224,7 +224,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
 .ll__hd p{max-width:30rem;justify-self:end}
 .ll__grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(1.5rem,3vw,3rem);align-items:stretch}
 .ll__img{position:relative;overflow:hidden;min-height:560px}
-.ll__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.ll__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0%}
 .ll__float{position:absolute;left:1.2rem;bottom:1.2rem;right:1.2rem;z-index:2;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);padding:1rem 1.2rem;display:flex;justify-content:space-between;align-items:center;font-size:.85rem}
 .ll__float b{font-family:var(--serif);font-weight:400;font-size:1.3rem}
 .spell{background:#fff;padding:clamp(1.6rem,3vw,2.8rem);display:flex;flex-direction:column}
@@ -273,7 +273,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
 .stats div{padding:1.4rem 0;text-align:center}
 .stats div+div{border-left:1px solid var(--line)}
 .stats b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1}
-.stats span{font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.74rem;color:var(--muted)}
+.stats b span{font:inherit;color:inherit;letter-spacing:inherit;text-transform:none}
+.stats div > span{font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.74rem;color:var(--muted)}
 .cmp{position:relative;aspect-ratio:16/10;background:#fff;overflow:hidden;user-select:none;border:1px solid var(--line)}
 .cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6%}
 .cmp .gen{clip-path:inset(0 0 0 var(--x,50%));background:#fff}
