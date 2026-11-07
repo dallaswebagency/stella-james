@@ -138,6 +138,9 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
   .ftr__top{grid-template-columns:1fr 1fr}
   .ftr__brand{grid-column:1/-1}
   .ftr__igrow{grid-template-columns:repeat(3,1fr)}
+  .ftr__col a,.ftr__legal a{display:block;padding:.45rem 0;margin-bottom:.3rem}
+  .ftr__ighd{flex-direction:column;gap:.4rem}
+  .gn__guide{min-height:460px}
   .ftr__legal{grid-template-columns:1fr 1fr}
   .gn{grid-template-columns:minmax(0,1fr)}
   .gn__guide{min-height:440px}
@@ -241,6 +244,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
   .mbar.show{transform:none}
   .mbar small{display:block;font-size:.72rem;color:var(--muted)}
 }
+@media (max-width:560px){.keys button{width:40px;height:40px}.chain{padding:.8rem 0}.buy h1{font-size:2.3rem}}
 </style>
 </head>
 <body>

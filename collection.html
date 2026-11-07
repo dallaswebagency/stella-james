@@ -138,6 +138,9 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
   .ftr__top{grid-template-columns:1fr 1fr}
   .ftr__brand{grid-column:1/-1}
   .ftr__igrow{grid-template-columns:repeat(3,1fr)}
+  .ftr__col a,.ftr__legal a{display:block;padding:.45rem 0;margin-bottom:.3rem}
+  .ftr__ighd{flex-direction:column;gap:.4rem}
+  .gn__guide{min-height:460px}
   .ftr__legal{grid-template-columns:1fr 1fr}
   .gn{grid-template-columns:minmax(0,1fr)}
   .gn__guide{min-height:440px}
@@ -151,7 +154,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
 .ch__l{display:flex;flex-direction:column;justify-content:center;padding:clamp(3rem,6vw,6rem) clamp(1.8rem,5vw,6rem);position:relative}
 .ch__crumb{font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.5px;font-size:.78rem;color:var(--muted);margin-bottom:2.4rem}
 .ch__crumb a:hover{color:var(--navy)}
-.ch h1{font-family:var(--serif);font-weight:400;text-transform:uppercase;font-size:clamp(3rem,6.4vw,6.6rem);line-height:.92;letter-spacing:.3px}
+.ch h1{font-family:var(--serif);font-weight:400;text-transform:uppercase;font-size:clamp(3rem,6.4vw,6.6rem);line-height:1;letter-spacing:.3px}
+.ch h1 span{padding-top:.08em}
 .ch h1 span{display:block;overflow:hidden}
 .ch h1 span i{display:block;font-style:normal;transform:translateY(105%);animation:up 1.2s var(--ease) forwards}
 .ch h1 span:nth-child(2) i{animation-delay:.12s}
@@ -284,6 +288,23 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;text-t
   .view{display:none}
   .card__acts{transform:none}
   .abc__row button{font-size:1.5rem}
+}
+@media (max-width:600px){
+  .ch__l{padding:2.4rem 6vw 3rem}.ch__glyph{font-size:11rem;right:0}
+  .ch__facts{gap:1.6rem}.ch__card{left:1rem;right:1rem;bottom:1rem}
+  .abc__row{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:.4rem;scrollbar-width:none}
+  .abc__row::-webkit-scrollbar{display:none}.abc__tip{display:none}
+  .abc__hd{flex-direction:column;gap:.3rem}
+  .bar__in{gap:.7rem}.bar__r{gap:.8rem;width:100%;justify-content:space-between}
+  .seg button{padding:.45rem .8rem;font-size:.72rem}
+  .grid{gap:2rem .8rem}
+  .card__acts{display:none}
+  .card__glyph{font-size:2.4rem}
+  .card__meta{flex-direction:column;gap:.2rem}
+  .card h3{font-size:1.1rem}.card small{display:none}
+  .tile{grid-template-columns:1fr}.tile__look:nth-child(n+3){display:none}
+  .tile__hd{flex-direction:column;gap:.3rem}
+  .qv__box{max-height:92vh}.qv__img{aspect-ratio:1}
 }
 </style>
 </head>
