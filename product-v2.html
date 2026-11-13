@@ -244,7 +244,7 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 .stack{display:flex;flex-direction:column;gap:.6rem}
 .stack figure{position:relative;aspect-ratio:4/5;background:#f8f8f8;overflow:hidden}
 .stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s var(--ease)}
-.stack figure.macro img{transform:scale(2.1);transform-origin:50% 66%}
+.stack figure.macro img{transform:scale(1.6);transform-origin:50% 72%}
 .stack figure.fade img{opacity:0}
 .stack .cap{position:absolute;left:1rem;bottom:1rem;z-index:2;font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.8px;font-size:.68rem;background:rgba(255,255,255,.92);border-radius:999px;padding:.3rem .75rem}
 .dots{display:none}
@@ -288,6 +288,10 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 .giftrow{margin-top:1rem;font-size:.86rem;display:flex;gap:.55rem;align-items:center}
 /* complete the look (chains, optional) */
 .ctl{margin-top:1.8rem;border-top:1px solid var(--line);padding-top:1.2rem}
+.ctl--wide{margin-top:2.4rem;padding-top:1.6rem}
+.ctl--wide h3{font-family:var(--serif);font-size:1.6rem;text-transform:none;letter-spacing:.2px;color:var(--navy);align-items:baseline}
+.ctl--wide .chn{grid-template-columns:72px 1fr auto;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.ctl--wide .chn img{width:72px;height:72px}
 .ctl h3{font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.8px;font-size:.74rem;color:var(--muted);margin-bottom:.9rem;display:flex;justify-content:space-between}
 .ctl h3 small{text-transform:none;letter-spacing:.2px;font-family:var(--sans);font-size:.78rem}
 .chn{display:grid;grid-template-columns:56px 1fr auto;gap:.9rem;align-items:center;padding:.55rem 0}
@@ -362,7 +366,10 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 .stl__row h3{font-family:var(--serif);font-weight:400;font-size:1.45rem;margin:1rem 0 .4rem}
 .stl__row p{font-size:.88rem;color:var(--ink);opacity:.8}
 
-.mbar2{display:none}
+.mbar2{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:.7rem max(4vw,calc((100vw - 1440px)/2));justify-content:space-between;align-items:center;gap:1rem;transform:translateY(100%);transition:transform .4s var(--ease)}
+.mbar2.show{transform:none}
+.mbar2 small{display:block;font-size:.74rem;color:var(--muted)}
+.mbar2 strong{font-weight:400}
 @media (max-width:1000px){
   .p2{grid-template-columns:1fr;gap:1.6rem;padding-top:.6rem}
   .stack{flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;gap:.4rem;margin:0 -4vw;scrollbar-width:none}
@@ -429,7 +436,7 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 </aside>
 <main id="main">
 <section class="wrap p2">
-  <div><div class="stack" id="stack"></div><div class="dots" id="dots"></div></div>
+  <div><div class="stack" id="stack"></div><div class="dots" id="dots"></div><div class="ctl ctl--wide"><h3>Complete the look <small>Optional</small></h3><div class="chn"><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/Frame4.jpg" alt="Choker Necklace" loading="lazy"><div><b>Choker Necklace</b><select data-ci="0" aria-label="Choker Necklace length"><option value="0">14.5" · $3,450</option><option value="1">15" · $3,650</option></select></div><button data-ch="0">Add</button></div><div class="chn"><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/Frame5.jpg" alt="Stella Chain" loading="lazy"><div><b>Stella Chain</b><select data-ci="1" aria-label="Stella Chain length"><option value="0">16" · $1,100</option><option value="1">18" · $1,300</option></select></div><button data-ch="1">Add</button></div><div class="chn"><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/Frame6.jpg" alt="Ball Beads Chain" loading="lazy"><div><b>Ball Beads Chain</b><select data-ci="2" aria-label="Ball Beads Chain length"><option value="0">16" · $1,390</option><option value="1">18" · $1,290</option></select></div><button data-ch="2">Add</button></div></div></div>
   <div class="panel">
     <div class="crumb2"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="collection-v2.html">Love Letters</a> &nbsp;/&nbsp; <span id="crumbLast">Letter B Pendant</span></div>
     <div class="panel__top"><div><span class="lbl">Love Letters</span><h1 id="title">Letter B Pendant</h1></div>
@@ -449,7 +456,6 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
     <div class="ship2"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M12 3l3 5-3 13-3-13z"/><path d="M5 8h14"/><path d="M5 8l7 13 7-13"/></svg>Made to order · ships in 4–6 weeks</div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg>Free shipping · insured, trackable delivery</div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>All sales are final due to the personalized nature of each piece</div></div>
     <label class="giftrow"><input type="checkbox" id="giftChk" checked> <svg style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="4" y="9" width="16" height="11"/><path d="M4 13h16M12 9v11"/><path d="M12 9c-2-4-6-4-6-1.5S10 9 12 9c2 0 6 1 6-1.5S14 5 12 9z"/></svg> Complimentary gift packaging</label>
 
-    <div class="ctl"><h3>Complete the look <small>Optional</small></h3><div class="chn"><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/Frame4.jpg" alt="Choker Necklace" loading="lazy"><div><b>Choker Necklace</b><select data-ci="0" aria-label="Choker Necklace length"><option value="0">14.5" · $3,450</option><option value="1">15" · $3,650</option></select></div><button data-ch="0">Add</button></div><div class="chn"><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/Frame5.jpg" alt="Stella Chain" loading="lazy"><div><b>Stella Chain</b><select data-ci="1" aria-label="Stella Chain length"><option value="0">16" · $1,100</option><option value="1">18" · $1,300</option></select></div><button data-ch="1">Add</button></div><div class="chn"><img src="https://cdn.shopify.com/s/files/1/0630/8931/1840/files/Frame6.jpg" alt="Ball Beads Chain" loading="lazy"><div><b>Ball Beads Chain</b><select data-ci="2" aria-label="Ball Beads Chain length"><option value="0">16" · $1,390</option><option value="1">18" · $1,290</option></select></div><button data-ch="2">Add</button></div></div>
 
     <div class="acc2">
       <details><summary>Details</summary><div class="in">
@@ -633,7 +639,9 @@ function drawAlso(){const out=[];for(let k=1;out.length<4;k++){out.push(LETTERS[
  document.getElementById('also').innerHTML=out.map(d=>'<a href="?l='+d.l+'&s='+size+'" data-l="'+d.l+'"><figure><img class="a" src="'+SHOP+(size==='s'?d.s:d.g)+'" alt="'+nameOf(d)+'" loading="lazy"><img class="b" src="'+SHOP+(size==='s'?d.g:d.s)+'" alt="" loading="lazy"></figure><div><span>'+nameOf(d)+'</span><span>'+fmt(size==='s'?d.ps:d.pg)+'</span></div></a>').join('');
  document.querySelectorAll('#also a').forEach(a=>a.onclick=e=>{e.preventDefault();li=LETTERS.findIndex(d=>d.l===a.dataset.l);render();scrollTo({top:0,behavior:'smooth'})})}
 render();
-// mobile sticky bar
+// panel: stick to top when it fits, otherwise stick by its bottom edge
+const pnl=document.querySelector('.panel');function fitPanel(){pnl.style.top=Math.min(78,innerHeight-pnl.offsetHeight-24)+'px'}fitPanel();addEventListener('resize',fitPanel);new ResizeObserver(fitPanel).observe(pnl);
+// sticky add-to-cart bar
 const ab=document.getElementById('addBtn'),mb=document.getElementById('mbar');
 new IntersectionObserver(([e])=>mb.classList.toggle('show',!e.isIntersecting&&e.boundingClientRect.top<0)).observe(ab);
 </script>
