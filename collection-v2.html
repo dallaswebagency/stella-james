@@ -280,8 +280,9 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 .pc{position:relative;opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .pc.in{opacity:1;transform:none}
 .pc.hide{display:none}
-.pc__img{position:relative;display:block;aspect-ratio:4/5;background:#f8f8f8;overflow:hidden}
-.pc__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transition:opacity .6s var(--ease),transform 1.2s var(--ease)}
+.pc__media{position:relative;overflow:hidden;background:#f8f8f8}
+.pc__img{position:relative;display:block;aspect-ratio:1/1.08;overflow:hidden}
+.pc__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 80%;transition:opacity .6s var(--ease),transform 1.2s var(--ease)}
 .pc__img img.b{opacity:0;transform:scale(1.35);transform-origin:50% 62%}
 .pc:hover .pc__img img.a{opacity:0}
 .pc:hover .pc__img img.b{opacity:1;transform:scale(1.75)}
@@ -298,7 +299,7 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 .pc:hover .pc__meta a{background-size:100% 1px}
 .pc__meta span{font-size:.92rem;color:var(--ink);white-space:nowrap}
 .pc__sub{font-family:var(--cond);text-transform:uppercase;letter-spacing:.8px;font-size:.68rem;color:var(--muted);margin-top:.15rem}
-.pc.flash .pc__img{outline:1px solid var(--navy);outline-offset:5px}
+.pc.flash .pc__media{outline:1px solid var(--navy);outline-offset:5px}
 
 /* ---------- L1 editorial tiles ---------- */
 .ed{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;min-height:clamp(380px,40vw,560px);background:var(--navy);color:#fff;opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
@@ -600,9 +601,9 @@ function list(){let L=LETTERS.map((d,i)=>({...d,i})).filter(pass);
  if(F.sort==='lo')L.sort((a,b)=>priceOf(a)-priceOf(b)||a.i-b.i);if(F.sort==='hi')L.sort((a,b)=>priceOf(b)-priceOf(a)||a.i-b.i);return L}
 function draw(){const L=list(),sz=F.size==='s'?'7.5mm':'9mm';let h='';
  L.forEach((d,n)=>{const a=F.size==='s'?d.s:d.g,b=F.size==='s'?d.g:d.s,href='product-v2.html?l='+d.l+'&s='+F.size,w=wish.includes(d.l);
-  h+=`<article class="pc" id="L-${d.l}" style="transition-delay:${(n%4)*.06}s"><a class="pc__img" href="${href}" aria-label="${nameOf(d)}"><img class="a" src="${SHOP+a}" alt="${nameOf(d)}, lab-grown diamond in 18k ${F.gold.toLowerCase()} gold, ${sz}" loading="lazy"><img class="b" src="${SHOP+b}" alt="" loading="lazy"></a>
+  h+=`<article class="pc" id="L-${d.l}" style="transition-delay:${(n%4)*.06}s"><div class="pc__media"><a class="pc__img" href="${href}" aria-label="${nameOf(d)}"><img class="a" src="${SHOP+a}" alt="${nameOf(d)}, lab-grown diamond in 18k ${F.gold.toLowerCase()} gold, ${sz}" loading="lazy"><img class="b" src="${SHOP+b}" alt="" loading="lazy"></a>
   <button class="pc__heart${w?' on':''}" data-w="${d.l}" aria-pressed="${w}" aria-label="Save ${nameOf(d)}">${HEART}</button>
-  <button class="pc__add" data-a="${d.i}">Add ${sz} to cart</button>
+  <button class="pc__add" data-a="${d.i}">Add ${sz} to cart</button></div>
   <div class="pc__meta"><a href="${href}">${nameOf(d)}</a><span>${fmt(priceOf(d))}</span></div><div class="pc__sub">${sz} · 18k ${F.gold.toLowerCase()} gold</div></article>`;
   if(n===7)h+=ED1;if(n===15)h+=LOOKS;if(n===23)h+=ED2});
  if(!L.length)h='<p class="empty">No pieces match these filters. <button class="c2h__more" onclick="clearF()">Clear filters</button></p>';
