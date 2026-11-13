@@ -257,6 +257,7 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 .v3bar__r b{font-weight:400;color:var(--muted)}
 .v3g{display:grid;grid-template-columns:repeat(4,1fr);gap:3.2rem 3rem;width:min(1600px,96vw);margin:0 auto;padding:.6rem 0 clamp(5rem,9vw,7rem)}
 .t3{position:relative}
+.t3__m{position:relative;overflow:hidden}
 .t3__img{position:relative;display:block;aspect-ratio:1/1.08;background:#fafafa;overflow:hidden}
 .t3__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 82%;transition:opacity .5s ease}
 .t3__img img.b{opacity:0;transform:scale(1.55);transform-origin:50% 64%}
@@ -468,7 +469,7 @@ const list=()=>{const L=LETTERS.map((d,i)=>({...d,i})).filter(ok);if(F.sort==='l
 const grid=document.getElementById('grid');
 function draw(){const L=list(),sz=F.size==='s'?'7.5mm':'9mm';let h='';
  L.forEach((d,n)=>{const href='product-v3.html?l='+d.l+'&s='+F.size,a=F.size==='s'?d.s:d.g,b=F.size==='s'?d.g:d.s,w=wish.includes(d.l);
-  h+=`<article class="t3" id="L-${d.l}"><a class="t3__img" href="${href}" aria-label="${nameOf(d)}"><img class="a" src="${SHOP+a}" alt="${nameOf(d)} in 18k gold, ${sz}" loading="lazy"><img class="b" src="${SHOP+b}" alt="" loading="lazy"><span class="t3__tag">${sz}</span></a><button class="t3__q" data-a="${d.i}">Quick add</button>
+  h+=`<article class="t3" id="L-${d.l}"><div class="t3__m"><a class="t3__img" href="${href}" aria-label="${nameOf(d)}"><img class="a" src="${SHOP+a}" alt="${nameOf(d)} in 18k gold, ${sz}" loading="lazy"><img class="b" src="${SHOP+b}" alt="" loading="lazy"><span class="t3__tag">${sz}</span></a><button class="t3__q" data-a="${d.i}">Quick add · ${sz}</button></div>
   <div class="t3__meta"><div><a href="${href}">${nameOf(d)}</a><span>${fmt(pr(d))}</span></div><button class="t3__heart${w?' on':''}" data-w="${d.l}" aria-pressed="${w}" aria-label="Save ${nameOf(d)}">${HEART}</button></div></article>`;
   if(n===7)h+=MO1;if(n===15)h+=TRIO});
  grid.innerHTML=h||'<p style="grid-column:1/-1;text-align:center;padding:4rem 0">No pieces match. <button onclick="F.type=F.price=\'all\';draw()" style="border-bottom:1px solid">Clear</button></p>';
