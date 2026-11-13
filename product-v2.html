@@ -372,6 +372,9 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 .mbar2 strong{font-weight:400}
 @media (max-width:1000px){
   .p2{grid-template-columns:1fr;gap:1.6rem;padding-top:.6rem}
+  .p2>div:first-child{display:contents}
+  .stack{order:1}.dots{order:2;margin-top:-1rem}.panel{order:3}.ctl--wide{order:4;margin-top:0}
+  .row__hd button{padding:.4rem 0}.wish{width:44px;height:44px}
   .stack{flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;gap:.4rem;margin:0 -4vw;scrollbar-width:none}
   .stack::-webkit-scrollbar{display:none}
   .stack figure{flex:0 0 86%;scroll-snap-align:start}

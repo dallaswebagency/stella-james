@@ -241,6 +241,7 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 .ann{background:#fff;color:var(--navy);border-bottom:1px solid var(--line);font-family:var(--cond);font-weight:500;text-transform:uppercase;letter-spacing:.8px;font-size:.7rem;text-align:center;padding:.55rem 1rem;display:flex;justify-content:center;gap:2.2rem;flex-wrap:wrap}
 .ann span{display:inline-flex;gap:.45rem;align-items:center}
 .ann svg{width:14px;height:14px}
+@media (max-width:760px){.ann{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:1.4rem;scrollbar-width:none;white-space:nowrap;font-size:.64rem}.ann::-webkit-scrollbar{display:none}.ann span{flex:none}}
 
 .v3h{text-align:center;padding:clamp(3.5rem,7vw,6rem) 0 clamp(2.4rem,5vw,4rem)}
 .v3h h1{font-family:var(--sans);font-weight:400;font-size:1.35rem;letter-spacing:.3px;color:var(--ink)}
@@ -318,12 +319,14 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 @media (max-width:1100px){.v3g{grid-template-columns:repeat(3,1fr);gap:2.6rem 1.6rem}}
 @media (max-width:760px){
   .v3g{grid-template-columns:1fr 1fr;gap:2.2rem .8rem}
-  .t3__heart{opacity:1}.t3__q{display:none}
+  .t3__heart{opacity:1;width:36px;height:36px;display:grid;place-items:center;margin:-6px -8px 0 0}.t3__q{display:none}
+  .v3bar__r button{padding:.6rem 0}
   .mo{grid-template-columns:1fr;gap:1.4rem}.mo.rev figure{order:0}
   .trio{grid-template-columns:1fr 1fr;gap:1rem}.trio a:nth-child(3){display:none}
   .perks{grid-template-columns:1fr 1fr}
-  .ann{gap:1rem;font-size:.64rem}
   .v3bar__l{display:none}
+  .v3h{padding-left:6vw;padding-right:6vw}
+  .v3bar__in{width:92vw}
 }
 </style>
 </head>
