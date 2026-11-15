@@ -72,9 +72,9 @@
     src.data.set(o); x.putImageData(src, 0, 0); return c; }
   // product layer: cleaned, scaled, graded (warmer gold, brighter stones) and sharpened
   function layer(img, an, r, s) { const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(r.w * s)); c.height = Math.max(1, Math.round(r.h * s));
-    const x = c.getContext('2d', { willReadFrequently: true }); x.filter = 'contrast(1.16) saturate(1.24) brightness(1.03)'; x.imageSmoothingQuality = 'high'; x.drawImage(crop(img, an, r), 0, 0, c.width, c.height);
+    const x = c.getContext('2d', { willReadFrequently: true }); x.filter = 'contrast(1.15) saturate(1.15) brightness(1.03)'; x.imageSmoothingQuality = 'high'; x.drawImage(crop(img, an, r), 0, 0, c.width, c.height);
     return sharpen(c, .32); }
-  function layout(img, an, W, H, share, cy, opt) { opt = opt || {}; const b = an.box, s = Math.min(H * share / b.h, W * (opt.maxW || .78) / b.w), cx = W / 2, cyy = H * cy;
+  function layout(img, an, W, H, share, cy, opt) { opt = opt || {}; const b = an.box, s = Math.min(H * share / b.h, W * (opt.maxW || .7) / b.w), cx = W / 2, cyy = H * cy;
     const pad = { l: b.w * .35, r: b.w * .35, t: b.h * .3, b: b.h * (an.reflection ? .7 : .35) };
     const r = { x: Math.max(0, b.x - pad.l), y: Math.max(0, b.y - pad.t) }; r.w = Math.min(img.naturalWidth, b.x + b.w + pad.r) - r.x; r.h = Math.min(img.naturalHeight, b.y + b.h + pad.b) - r.y;
     return { b, s, cx, cyy, r, dx: cx - (b.x + b.w / 2 - r.x) * s, dy: cyy - (b.y + b.h / 2 - r.y) * s, bottom: cyy + b.h * s / 2 }; }
