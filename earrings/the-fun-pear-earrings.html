@@ -371,7 +371,7 @@ function cards(){document.querySelectorAll('.mcard').forEach(a=>{const im=a.quer
  OLD=P.orig.map(n=>S.SHOP+n+'?width=1400');
  // order: front, pair, other angles, diamond close-up, model photos
  const out=[await S.packshot(imgs[P.pack[0]],{share:.48,maxW:.56,cy:.46})];
- if(P.pack.length&&P.h!=='the-fun-pear-earrings'){const pr=await S.pair(imgs[P.pack[0]]);if(pr)out.push(pr)}
+ if(P.h==='round-studs'){const pr=await S.pair(imgs[P.pack[0]]);if(pr)out.push(pr)}
  for(const i of P.pack.slice(1))out.push(await S.packshot(imgs[i],{share:.48,maxW:.56,cy:.46}));
  out.push(await S.closeup(imgs[P.focus[0]],P.focus[1]));
  for(const [i,pt] of P.worn)out.push(await S.worn(imgs[i],pt));

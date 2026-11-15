@@ -247,7 +247,7 @@ const S=SJIMG;const q=new URLSearchParams(location.search),h=q.get('p')||P[0].h,
 (async()=>{await S.fonts();const imgs=await Promise.all(p.orig.map(n=>S.load(n)));
  const old=[];for(const im of imgs)old.push(await S.original(im,{W:800,H:1000}));
  const o8={W:800,H:1000},ps={W:800,H:1000,share:.48,maxW:.56,cy:.46};const nw=[await S.packshot(imgs[p.pack[0]],ps)];let np=1;
- if(p.h!=='the-fun-pear-earrings'){const pr=await S.pair(imgs[p.pack[0]],o8);if(pr){nw.push(pr);np++}}
+ if(p.h==='round-studs'){const pr=await S.pair(imgs[p.pack[0]],o8);if(pr){nw.push(pr);np++}}
  for(const i of p.pack.slice(1)){nw.push(await S.packshot(imgs[i],ps));np++}
  nw.push(await S.closeup(imgs[p.focus[0]],p.focus[1],o8));
  for(const [i,pt] of p.worn)nw.push(await S.worn(imgs[i],pt,o8));for(const i of (p.extra||[]))nw.push(await S.cover(imgs[i],Object.assign({top:.3},o8)));nw.push(await S.card(imgs[p.pack[0]],p,o8));
