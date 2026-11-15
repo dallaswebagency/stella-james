@@ -74,7 +74,7 @@
   function layer(img, an, r, s) { const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(r.w * s)); c.height = Math.max(1, Math.round(r.h * s));
     const x = c.getContext('2d', { willReadFrequently: true }); x.filter = 'contrast(1.15) saturate(1.15) brightness(1.03)'; x.imageSmoothingQuality = 'high'; x.drawImage(crop(img, an, r), 0, 0, c.width, c.height);
     return sharpen(c, .32); }
-  function layout(img, an, W, H, share, cy, opt) { opt = opt || {}; const b = an.box, s = Math.min(H * share / b.h, W * (opt.maxW || .7) / b.w), cx = W / 2, cyy = H * cy;
+  function layout(img, an, W, H, share, cy, opt) { opt = opt || {}; const b = an.box, s = Math.min(H * share / b.h, W * (opt.maxW || .7) / b.w), cx = W * (opt.cx || .5), cyy = H * cy;
     const pad = { l: b.w * .35, r: b.w * .35, t: b.h * .3, b: b.h * (an.reflection ? .7 : .35) };
     const r = { x: Math.max(0, b.x - pad.l), y: Math.max(0, b.y - pad.t) }; r.w = Math.min(img.naturalWidth, b.x + b.w + pad.r) - r.x; r.h = Math.min(img.naturalHeight, b.y + b.h + pad.b) - r.y;
     return { b, s, cx, cyy, r, dx: cx - (b.x + b.w / 2 - r.x) * s, dy: cyy - (b.y + b.h / 2 - r.y) * s, bottom: cyy + b.h * s / 2 }; }
@@ -100,6 +100,15 @@
     const r = Math.max(W / img.naturalWidth, H / img.naturalHeight), iw = img.naturalWidth * r, ih = img.naturalHeight * r; x.filter = GRADE; x.drawImage(img, (W - iw) / 2, (H - ih) * (o.top || .35), iw, ih); x.filter = 'none'; grade(x, W, H);
     if (o.mark !== false) { const g = x.createLinearGradient(0, H * .82, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.25)'); x.fillStyle = g; x.fillRect(0, H * .82, W, H * .18); mark(x, W, H, true); }
     c._cover = true; return c; }
+  // matching pair from a single-earring photo: the earring and its mirror image side by side
+  function flip(img) { const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight; const x = c.getContext('2d');
+    x.translate(c.width, 0); x.scale(-1, 1); x.drawImage(img, 0, 0); c.naturalWidth = c.width; c.naturalHeight = c.height; return c; }
+  async function pair(img, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, an = analyze(img);
+    if (!an.packshot) return null; const f = flip(img), af = analyze(f), share = o.share || .42, cy = o.cy || .46, gap = o.gap || .23;
+    const L = layout(img, an, W, H, share, cy, { maxW: .36, cx: .5 - gap }), [c, x] = canvas(W, H, IVORY);
+    studio(x, W, H, { hz: Math.min(.86, L.bottom / H - .035), cy: cy });
+    placeOn(x, f, af, W, H, share, cy, { maxW: .36, cx: .5 - gap }); placeOn(x, img, an, W, H, share, cy, { maxW: .36, cx: .5 + gap });
+    if (o.mark !== false) mark(x, W, H); return c; }
   async function closeup(img, f, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, an = analyze(img), b = an.box;
     const size = b.h * f[2], cxs = b.x + b.w * f[0], cys = b.y + b.h * f[1];
     const sub = { box: { x: cxs - size * .5, y: cys - size * .5, w: size, h: size }, bg: an.bg, reflection: false };
@@ -126,5 +135,5 @@
   async function fonts() { try { await document.fonts.ready; await document.fonts.load('400 40px ' + SERIF); await document.fonts.load('500 20px ' + COND); } catch (e) { } }
   const toURL = c => c.toDataURL('image/jpeg', .9);
   const download = (c, n) => new Promise(r => c.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = n; a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); r(); }, 400); }, 'image/jpeg', .92));
-  window.SJIMG = { load, analyze, packshot, cover, closeup, worn, card, original, fonts, toURL, download, SHOP };
+  window.SJIMG = { load, analyze, packshot, pair, cover, closeup, worn, card, original, fonts, toURL, download, SHOP };
 })();
