@@ -372,7 +372,7 @@ function cards(){document.querySelectorAll('.mcard').forEach(a=>{const im=a.quer
  // order: front, pair, other angles, diamond close-up, model photos
  const out=[];if(P.ai){for(const a of P.ai)out.push(a[0])}else{out.push(await S.packshot(imgs[P.pack[0]],{share:.48,maxW:.56,cy:.46}));
  for(const i of P.pack.slice(1))out.push(await S.packshot(imgs[i],{share:.48,maxW:.56,cy:.46}))}
- out.push(await S.closeup(imgs[P.focus[0]],P.focus[1]));
+ out.push(await S.closeup(imgs[P.focus[0]],P.focus[1]));for(const a of (P.aim||[]))out.push(a[0]);
  for(const [i,pt] of P.worn)out.push(await S.worn(imgs[i],pt));
  for(const i of (P.extra||[]))out.push(await S.cover(imgs[i],{top:.3}));
  NEW=out.map(c=>typeof c==='string'?c:S.toURL(c));gal.querySelector('.ld').remove();show(0);window.SJ_READY=1;
