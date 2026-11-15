@@ -103,7 +103,7 @@
   async function closeup(img, f, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, an = analyze(img), b = an.box;
     const size = b.h * f[2], cxs = b.x + b.w * f[0], cys = b.y + b.h * f[1];
     const sub = { box: { x: cxs - size * .5, y: cys - size * .5, w: size, h: size }, bg: an.bg, reflection: false };
-    const [c, x] = canvas(W, H, IVORY); studio(x, W, H, { hz: 1.2, cy: .48 }); placeOn(x, img, sub, W, H, .74, .48, { maxW: .88, noShadow: true }); mark(x, W, H); return c; }
+    const [c, x] = canvas(W, H, IVORY); studio(x, W, H, { hz: 1.2, cy: .48 }); placeOn(x, img, sub, W, H, .62, .48, { maxW: .76, noShadow: true }); mark(x, W, H); return c; }
   async function worn(img, pt, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, [c, x] = canvas(W, H, '#ddd');
     const r = Math.max(W / img.naturalWidth, H / img.naturalHeight), iw = img.naturalWidth * r, ih = img.naturalHeight * r;
     const ox = Math.min(0, Math.max(W - iw, W / 2 - pt[0] * iw)), oy = Math.min(0, Math.max(H - ih, H * .45 - pt[1] * ih)); x.drawImage(img, ox, oy, iw, ih);
