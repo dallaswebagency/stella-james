@@ -94,8 +94,8 @@
   const GRADE = 'contrast(1.1) saturate(1.12) brightness(1.05) sepia(.07)';
   async function packshot(img, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, an = analyze(img);
     if (!an.packshot) return cover(img, o);
-    const share = o.share || .66, cy = o.cy || .47, L = layout(img, an, W, H, share, cy), [c, x] = canvas(W, H, IVORY);
-    studio(x, W, H, { hz: Math.min(.86, L.bottom / H - .035), cy: cy }); placeOn(x, img, an, W, H, share, cy); if (o.mark !== false) mark(x, W, H); c._fill = share; c._was = an.fill; return c; }
+    const share = o.share || .66, cy = o.cy || .47, L = layout(img, an, W, H, share, cy, { maxW: o.maxW }), [c, x] = canvas(W, H, IVORY);
+    studio(x, W, H, { hz: Math.min(.86, L.bottom / H - .035), cy: cy }); placeOn(x, img, an, W, H, share, cy, { maxW: o.maxW }); if (o.mark !== false) mark(x, W, H); c._fill = share; c._was = an.fill; return c; }
   async function cover(img, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, [c, x] = canvas(W, H, '#eee');
     const r = Math.max(W / img.naturalWidth, H / img.naturalHeight), iw = img.naturalWidth * r, ih = img.naturalHeight * r; x.filter = GRADE; x.drawImage(img, (W - iw) / 2, (H - ih) * (o.top || .35), iw, ih); x.filter = 'none'; grade(x, W, H);
     if (o.mark !== false) { const g = x.createLinearGradient(0, H * .82, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.25)'); x.fillStyle = g; x.fillRect(0, H * .82, W, H * .18); mark(x, W, H, true); }
