@@ -252,6 +252,6 @@ const S=SJIMG;const q=new URLSearchParams(location.search),h=q.get('p')||P[0].h,
  document.getElementById('set').innerHTML='<h2>'+p.name+'</h2><div class="row"><div class="lab">Now</div>'+old.map(c=>'<img src="'+u(c)+'">').join('')+'</div><div class="row"><div class="lab">New</div>'+nw.map(c=>'<img src="'+u(c)+'">').join('')+'</div>';
  const fA=old[0],fB=nw[0];document.getElementById('front').innerHTML='<div class="pair"><figure><img src="'+u(fA)+'"><figcaption>Now</figcaption></figure><figure><img src="'+u(fB)+'"><figcaption>New</figcaption></figure></div>';
  const wi=p.worn[0][0],wn=nw[p.pack.length+1];document.getElementById('worn').innerHTML='<div class="pair"><figure><img src="'+u(old[wi])+'"><figcaption>Now</figcaption></figure><figure><img src="'+u(wn)+'"><figcaption>New</figcaption></figure><figure><img src="'+u(nw[p.pack.length])+'"><figcaption>New close-up</figcaption></figure></div>';
- const an=S.analyze(imgs[p.pack[0]]);window.SJ_STATS={was:Math.round(an.fill*100),now:58,oldN:p.orig.length,newN:nw.length};
+ const an=S.analyze(imgs[p.pack[0]]);window.SJ_STATS={was:Math.round(an.fill*100),now:66,oldN:p.orig.length,newN:nw.length};
  document.getElementById((q.get('b')||'set')).classList.add('on');window.SJ_READY=1})();
 </script></body></html>

@@ -55,26 +55,55 @@
     if (L) { const lw = W * .18, lh = lw * 20 / 166; x.drawImage(L, (W - lw) / 2, H - lh - H * .04, lw, lh); }
     else { x.fillStyle = dark ? '#fff' : NAVY; x.textAlign = 'center'; x.font = '400 ' + (W * .028) + 'px ' + SERIF; x.fillText('STELLA JAMES', W / 2, H * .95); }
     x.restore(); }
-  function placeOn(x, img, an, W, H, share, cy, opt) {
-    opt = opt || {}; const b = an.box, s = Math.min(H * share / b.h, W * (opt.maxW || .74) / b.w), cx = W / 2, cyy = H * cy;
+  // ---- studio look: warm wall, spotlight, tabletop surface, fine grain ----
+  let GRAIN = null;
+  function grain() { if (GRAIN) return GRAIN; const c = document.createElement('canvas'); c.width = c.height = 160; const x = c.getContext('2d'), d = x.createImageData(160, 160);
+    for (let k = 0; k < d.data.length; k += 4) { const v = 128 + (Math.random() - .5) * 90; d.data[k] = d.data[k + 1] = d.data[k + 2] = v; d.data[k + 3] = 255; } x.putImageData(d, 0, 0); return GRAIN = c; }
+  function studio(x, W, H, o) { o = o || {}; const hz = (o.hz == null ? .66 : o.hz) * H, cx = (o.cx || .5) * W, cy = (o.cy || .48) * H;
+    let g = x.createLinearGradient(0, 0, 0, hz); g.addColorStop(0, '#E4DDD1'); g.addColorStop(1, '#F3EFE8'); x.fillStyle = g; x.fillRect(0, 0, W, hz);
+    g = x.createLinearGradient(0, hz, 0, H); g.addColorStop(0, '#F8F5EF'); g.addColorStop(.35, '#EFE9DF'); g.addColorStop(1, '#DDD4C5'); x.fillStyle = g; x.fillRect(0, hz, W, H - hz);
+    g = x.createLinearGradient(0, hz - H * .03, 0, hz + H * .03); g.addColorStop(0, 'rgba(243,239,232,0)'); g.addColorStop(.5, 'rgba(250,248,243,.9)'); g.addColorStop(1, 'rgba(248,245,239,0)'); x.fillStyle = g; x.fillRect(0, hz - H * .03, W, H * .06);
+    g = x.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * .5); g.addColorStop(0, 'rgba(255,255,253,1)'); g.addColorStop(.45, 'rgba(255,254,250,.55)'); g.addColorStop(1, 'rgba(255,254,250,0)'); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    g = x.createRadialGradient(W / 2, H / 2, Math.min(W, H) * .45, W / 2, H / 2, Math.max(W, H) * .78); g.addColorStop(0, 'rgba(60,48,30,0)'); g.addColorStop(1, 'rgba(60,48,30,.16)'); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.save(); x.globalAlpha = .045; x.globalCompositeOperation = 'overlay'; x.fillStyle = x.createPattern(grain(), 'repeat'); x.fillRect(0, 0, W, H); x.restore(); }
+  function sharpen(c, amt) { const x = c.getContext('2d', { willReadFrequently: true }), w = c.width, h = c.height, src = x.getImageData(0, 0, w, h), a = src.data, o = new Uint8ClampedArray(a);
+    for (let j = 1; j < h - 1; j++) for (let i = 1; i < w - 1; i++) { const k = (j * w + i) * 4;
+      for (let n = 0; n < 3; n++) { const v = a[k + n] * (1 + 4 * amt) - amt * (a[k + n - 4] + a[k + n + 4] + a[k + n - w * 4] + a[k + n + w * 4]); o[k + n] = v; } }
+    src.data.set(o); x.putImageData(src, 0, 0); return c; }
+  // product layer: cleaned, scaled, graded (warmer gold, brighter stones) and sharpened
+  function layer(img, an, r, s) { const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(r.w * s)); c.height = Math.max(1, Math.round(r.h * s));
+    const x = c.getContext('2d', { willReadFrequently: true }); x.filter = 'contrast(1.16) saturate(1.24) brightness(1.03)'; x.imageSmoothingQuality = 'high'; x.drawImage(crop(img, an, r), 0, 0, c.width, c.height);
+    return sharpen(c, .32); }
+  function layout(img, an, W, H, share, cy, opt) { opt = opt || {}; const b = an.box, s = Math.min(H * share / b.h, W * (opt.maxW || .78) / b.w), cx = W / 2, cyy = H * cy;
     const pad = { l: b.w * .35, r: b.w * .35, t: b.h * .3, b: b.h * (an.reflection ? .7 : .35) };
     const r = { x: Math.max(0, b.x - pad.l), y: Math.max(0, b.y - pad.t) }; r.w = Math.min(img.naturalWidth, b.x + b.w + pad.r) - r.x; r.h = Math.min(img.naturalHeight, b.y + b.h + pad.b) - r.y;
-    const dx = cx - (b.x + b.w / 2 - r.x) * s, dy = cyy - (b.y + b.h / 2 - r.y) * s;
-    if (!an.reflection && !opt.noShadow) { const sy = dy + (b.y + b.h - r.y) * s + H * .012, g = x.createRadialGradient(cx, sy, 2, cx, sy, b.w * s * .5);
-      g.addColorStop(0, 'rgba(70,58,35,.17)'); g.addColorStop(1, 'rgba(70,58,35,0)'); x.save(); x.translate(cx, sy); x.scale(1, .1); x.translate(-cx, -sy); x.fillStyle = g; x.fillRect(cx - b.w * s, sy - b.w * s, b.w * s * 2, b.w * s * 2); x.restore(); }
-    x.save(); x.globalCompositeOperation = 'multiply'; x.filter = 'contrast(1.07) saturate(1.06)'; x.drawImage(crop(img, an, r), dx, dy, r.w * s, r.h * s); x.restore();
+    return { b, s, cx, cyy, r, dx: cx - (b.x + b.w / 2 - r.x) * s, dy: cyy - (b.y + b.h / 2 - r.y) * s, bottom: cyy + b.h * s / 2 }; }
+  function placeOn(x, img, an, W, H, share, cy, opt) {
+    opt = opt || {}; const L = layout(img, an, W, H, share, cy, opt), { b, s, cx, r, dx, dy } = L, P = layer(img, an, r, s), by = L.bottom;
+    if (!opt.noShadow) { // contact shadow
+      const g = x.createRadialGradient(cx, by, 2, cx, by, b.w * s * .55); g.addColorStop(0, 'rgba(55,42,22,.30)'); g.addColorStop(.5, 'rgba(55,42,22,.12)'); g.addColorStop(1, 'rgba(55,42,22,0)');
+      x.save(); x.translate(cx, by); x.scale(1, .09); x.translate(-cx, -by); x.fillStyle = g; x.fillRect(cx - b.w * s, by - b.w * s, b.w * s * 2, b.w * s * 2); x.restore(); }
+    if (!opt.noShadow && !an.reflection) { // mirror reflection on the surface
+      const top = (b.y + b.h - r.y) * s, rh = Math.min(P.height - 0, b.h * s * .55), R = document.createElement('canvas'); R.width = P.width; R.height = Math.round(rh);
+      const rx = R.getContext('2d'); rx.save(); rx.translate(0, top); rx.scale(1, -1); rx.drawImage(P, 0, 0); rx.restore();
+      const g = rx.createLinearGradient(0, 0, 0, R.height); g.addColorStop(0, 'rgba(255,255,255,.62)'); g.addColorStop(.7, 'rgba(255,255,255,1)'); rx.fillStyle = g; rx.fillRect(0, 0, R.width, R.height);
+      x.save(); x.globalCompositeOperation = 'multiply'; x.drawImage(R, dx, by + H * .004); x.restore(); }
+    x.save(); x.globalCompositeOperation = 'multiply'; x.drawImage(P, dx, dy); x.restore();
   }
+  function grade(x, W, H) { const g = x.createRadialGradient(W / 2, H * .45, Math.min(W, H) * .35, W / 2, H * .45, Math.max(W, H) * .75); g.addColorStop(0, 'rgba(25,20,40,0)'); g.addColorStop(1, 'rgba(25,20,40,.28)'); x.fillStyle = g; x.fillRect(0, 0, W, H); }
+  const GRADE = 'contrast(1.1) saturate(1.12) brightness(1.05) sepia(.07)';
   async function packshot(img, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, an = analyze(img);
     if (!an.packshot) return cover(img, o);
-    const [c, x] = canvas(W, H, IVORY); placeOn(x, img, an, W, H, o.share || .58, .5); if (o.mark !== false) mark(x, W, H); c._fill = .58; c._was = an.fill; return c; }
+    const share = o.share || .66, cy = o.cy || .47, L = layout(img, an, W, H, share, cy), [c, x] = canvas(W, H, IVORY);
+    studio(x, W, H, { hz: Math.min(.86, L.bottom / H - .035), cy: cy }); placeOn(x, img, an, W, H, share, cy); if (o.mark !== false) mark(x, W, H); c._fill = share; c._was = an.fill; return c; }
   async function cover(img, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, [c, x] = canvas(W, H, '#eee');
-    const r = Math.max(W / img.naturalWidth, H / img.naturalHeight), iw = img.naturalWidth * r, ih = img.naturalHeight * r; x.drawImage(img, (W - iw) / 2, (H - ih) * (o.top || .35), iw, ih);
+    const r = Math.max(W / img.naturalWidth, H / img.naturalHeight), iw = img.naturalWidth * r, ih = img.naturalHeight * r; x.filter = GRADE; x.drawImage(img, (W - iw) / 2, (H - ih) * (o.top || .35), iw, ih); x.filter = 'none'; grade(x, W, H);
     if (o.mark !== false) { const g = x.createLinearGradient(0, H * .82, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.25)'); x.fillStyle = g; x.fillRect(0, H * .82, W, H * .18); mark(x, W, H, true); }
     c._cover = true; return c; }
   async function closeup(img, f, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, an = analyze(img), b = an.box;
     const size = b.h * f[2], cxs = b.x + b.w * f[0], cys = b.y + b.h * f[1];
     const sub = { box: { x: cxs - size * .5, y: cys - size * .5, w: size, h: size }, bg: an.bg, reflection: false };
-    const [c, x] = canvas(W, H, IVORY); placeOn(x, img, sub, W, H, .66, .48, { maxW: .82, noShadow: true }); mark(x, W, H); return c; }
+    const [c, x] = canvas(W, H, IVORY); studio(x, W, H, { hz: 1.2, cy: .48 }); placeOn(x, img, sub, W, H, .74, .48, { maxW: .88, noShadow: true }); mark(x, W, H); return c; }
   async function worn(img, pt, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, [c, x] = canvas(W, H, '#ddd');
     const r = Math.max(W / img.naturalWidth, H / img.naturalHeight), iw = img.naturalWidth * r, ih = img.naturalHeight * r;
     const ox = Math.min(0, Math.max(W - iw, W / 2 - pt[0] * iw)), oy = Math.min(0, Math.max(H - ih, H * .45 - pt[1] * ih)); x.drawImage(img, ox, oy, iw, ih);
@@ -82,12 +111,12 @@
     x.save(); x.strokeStyle = 'rgba(255,255,255,.9)'; x.lineWidth = 3; x.beginPath(); x.arc(ex, ey, W * .035, 0, 7); x.stroke();
     const ang = Math.atan2(cy - ey, cx - ex); x.beginPath(); x.moveTo(ex + Math.cos(ang) * W * .035, ey + Math.sin(ang) * W * .035); x.lineTo(cx - Math.cos(ang) * R, cy - Math.sin(ang) * R); x.stroke();
     x.beginPath(); x.arc(cx, cy, R, 0, 7); x.closePath(); x.shadowColor = 'rgba(20,21,70,.35)'; x.shadowBlur = 40; x.fillStyle = '#fff'; x.fill(); x.shadowColor = 'transparent'; x.clip();
-    x.drawImage(img, cx - pt[0] * iw * z + (ox - ox), cy - pt[1] * ih * z, iw * z, ih * z); x.restore();
+    x.filter = GRADE; x.drawImage(img, cx - pt[0] * iw * z, cy - pt[1] * ih * z, iw * z, ih * z); x.restore();
     x.save(); x.strokeStyle = '#fff'; x.lineWidth = 8; x.beginPath(); x.arc(cx, cy, R, 0, 7); x.stroke(); x.restore();
     const g = x.createLinearGradient(0, H * .82, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.25)'); x.fillStyle = g; x.fillRect(0, H * .82, W, H * .18); mark(x, W, H, true);
     c._hs = { x: ex / W, y: ey / H }; return c; }
   async function card(img, p, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, an = analyze(img), [c, x] = canvas(W, H, NAVY);
-    const pw = W * .72, ph = H * .5, px = (W - pw) / 2, py = H * .1, [pc, pxx] = canvas(Math.round(pw), Math.round(ph), IVORY); placeOn(pxx, img, an, pw, ph, .62, .5, { maxW: .7 });
+    const pw = W * .72, ph = H * .5, px = (W - pw) / 2, py = H * .1, [pc, pxx] = canvas(Math.round(pw), Math.round(ph), IVORY); const Lc = layout(img, an, pw, ph, .6, .46, { maxW: .7 }); studio(pxx, pw, ph, { hz: Math.min(.88, Lc.bottom / ph - .03), cy: .46 }); placeOn(pxx, img, an, pw, ph, .6, .46, { maxW: .7 });
     x.save(); x.beginPath(); x.roundRect ? x.roundRect(px, py, pw, ph, 18) : x.rect(px, py, pw, ph); x.clip(); x.drawImage(pc, px, py); x.restore();
     x.fillStyle = '#fff'; x.textAlign = 'center'; x.font = '400 ' + (W * .07) + 'px ' + SERIF; x.fillText(p.name, W / 2, H * .74, W * .86);
     x.font = '500 ' + (W * .021) + 'px ' + COND; x.fillStyle = 'rgba(255,255,255,.78)'; x.fillText(p.line.toUpperCase(), W / 2, H * .79, W * .86);
