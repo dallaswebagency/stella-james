@@ -368,7 +368,7 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
 <section class="ei ei-hero">
  <span class="lbl">Earrings · image refresh sample</span>
  <h1>Better product images,<br>made from your own photos</h1>
- <p>We reviewed every image in the Earrings collection, then rebuilt the image set for two pieces: cleaner packshots at a consistent scale, a diamond close-up, model shots with a zoom inset, a navy brand card, and a subtle Stella James watermark. The product page viewer below is interactive: hover to zoom, tap the + on model photos, and drag to turn.</p>
+ <p>We reviewed every image in the Earrings collection, then rebuilt the image set for two pieces: cleaner packshots at a consistent scale, a diamond close-up, model shots with a zoom inset, a navy brand card, and a subtle Stella James watermark. The product page viewer below is interactive: hover to zoom, tap the + on model photos to jump to the close-up, and drag the slider to turn the piece.</p>
  <nav class="ei-nav"><a href="#review">Image review</a><a href="#p0">Heart Hoop</a><a href="#p1">Asscher Cut Studs</a><a href="#standard">Image standard</a></nav>
 </section>
 
@@ -384,7 +384,7 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
   <div class="vw">
    <div class="stage" id="st0"><div class="loading">Preparing images…</div><div class="lens" id="ln0"></div><div class="pop" id="pp0"></div></div>
    <div class="thumbs" id="th0"></div>
-   <p class="vhint" id="hn0">Hover to zoom · tap the + on model photos · drag to turn</p>
+   <p class="vhint" id="hn0">Hover to zoom · tap the + on model photos for the close-up · drag to turn</p>
   </div>
   <div class="inf">
    <span class="lbl">Sample 1 of 2 · Earrings</span>
@@ -412,7 +412,7 @@ a:hover > .hs .h2,.hs:hover .h2,a:focus-visible > .hs .h2{opacity:1;transform:sc
   <div class="vw">
    <div class="stage" id="st1"><div class="loading">Preparing images…</div><div class="lens" id="ln1"></div><div class="pop" id="pp1"></div></div>
    <div class="thumbs" id="th1"></div>
-   <p class="vhint" id="hn1">Hover to zoom · tap the + on model photos · drag to turn</p>
+   <p class="vhint" id="hn1">Hover to zoom · tap the + on model photos for the close-up · drag to turn</p>
   </div>
   <div class="inf">
    <span class="lbl">Sample 2 of 2 · Earrings</span>
@@ -591,8 +591,8 @@ async function build(i){const p=P[i];
   th.querySelectorAll('button').forEach((b,k)=>b.classList.toggle('on',k===n));
   lens.style.backgroundImage='url('+it.c.toDataURL('image/jpeg',.85)+')';
   hs&&hs.remove();hs=null;pop.classList.remove('show');turn&&turn.remove();turn=null;st.classList.toggle('nozoom',!!it.c._hs);
-  if(it.c._hs){hs=document.createElement('button');hs.className='hs';hs.textContent='+';hs.setAttribute('aria-label','Zoom on the earring');hs.style.left=it.c._hs.ex*100+'%';hs.style.top=it.c._hs.ey*100+'%';
-   hs.onclick=e=>{e.stopPropagation();const on=pop.classList.toggle('show');if(on){const m=n===3?m1:m2,pt=n===3?p.p1:p.p2;pop.style.backgroundImage='url('+m.src+')';pop.style.backgroundSize=(m.naturalWidth/m.naturalHeight*500)+'% 500%';pop.style.backgroundSize='600%';pop.style.backgroundPosition=(pt[0]*100)+'% '+(pt[1]*100)+'%';pop.style.left=(it.c._hs.ex<.5?52:6)+'%';pop.style.top=(it.c._hs.ey<.5?50:8)+'%'}};st.appendChild(hs)}
+  if(it.c._hs){hs=document.createElement('button');hs.className='hs';hs.textContent='+';hs.setAttribute('aria-label','See the diamond close-up');hs.style.left=it.c._hs.ex*100+'%';hs.style.top=it.c._hs.ey*100+'%';
+   hs.onclick=e=>{e.stopPropagation();show(2)};st.appendChild(hs)}
   if(n<2){turn=document.createElement('label');turn.className='turn';turn.innerHTML='Front<input type="range" min="0" max="100" value="'+(n?100:0)+'" aria-label="Turn the earring">Angle';st.appendChild(turn);
    const inp=turn.querySelector('input');inp.oninput=()=>{const v=inp.value/100;if(!st._b){st._b=document.createElement('img');st._b.style.pointerEvents='none';st.insertBefore(st._b,main.nextSibling)}st._b.src=items[1].c.toDataURL('image/jpeg',.9);main.src=items[0].c.toDataURL('image/jpeg',.9);st._b.style.opacity=v;main.style.opacity=1};
    if(st._b)st._b.style.opacity=n?1:0}
