@@ -534,7 +534,7 @@ function cutout(img){const w=img.naturalWidth,h=img.naturalHeight,c=document.cre
  x.putImageData(d,0,0);const o=document.createElement('canvas');o.width=x1-x0+1;o.height=y1-y0+1;o.getContext('2d').drawImage(c,x0,y0,o.width,o.height,0,0,o.width,o.height);
  return {cv:o,fill:(y1-y0)/h,bg}}
 function base(c,bg){c.width=W;c.height=H;const x=c.getContext('2d');x.fillStyle=bg||BG;x.fillRect(0,0,W,H);return x}
-function mark(x,dark){const L=dark?LOGO_W:LOGO_N,lw=W*.17,lh=lw*20/166;x.save();x.globalAlpha=dark?.55:.38;x.drawImage(L,(W-lw)/2,H-lh-H*.045,lw,lh);x.restore()}
+function mark(x,dark){const L=dark?LOGO_W:LOGO_N;if(!L){x.save();x.globalAlpha=dark?.55:.38;x.fillStyle=dark?'#fff':NAVY;x.textAlign='center';x.font='400 '+(W*.03)+'px '+SERIF;x.fillText('STELLA JAMES',W/2,H*.945);x.restore();return}const lw=W*.17,lh=lw*20/166;x.save();x.globalAlpha=dark?.55:.38;x.drawImage(L,(W-lw)/2,H-lh-H*.045,lw,lh);x.restore()}
 function placeProduct(x,cut,hShare,cy){const s=Math.min(H*hShare/cut.height,W*.66/cut.width),pw=cut.width*s,ph=cut.height*s,px=(W-pw)/2,py=H*cy-ph/2;
  // contact shadow
  const g=x.createRadialGradient(W/2,py+ph+H*.012,4,W/2,py+ph+H*.012,pw*.5);g.addColorStop(0,'rgba(60,50,30,.16)');g.addColorStop(1,'rgba(60,50,30,0)');
@@ -621,7 +621,8 @@ async function renderStatic(){const rows=document.getElementById('rvb');rows.inn
   const k=document.querySelectorAll('#kp b');k[0].textContent=STATIC.length;k[1].textContent=tot;k[2].textContent=fills.length?Math.round(fills.reduce((a,b)=>a+b,0)/fills.length*100)+'%':'…';k[3].textContent=shapes.size;k[4].textContent=need}}
 
 (async()=>{await document.fonts.ready;try{await document.fonts.load('400 40px '+SERIF);await document.fonts.load('500 20px '+COND)}catch(e){}
- await logos();for(let i=0;i<P.length;i++){try{await build(i)}catch(e){console.error(e);document.querySelector('#st'+i+' .loading').textContent='Could not load images'}}
+ try{await Promise.race([logos(),new Promise((_,r)=>setTimeout(r,6000))])}catch(e){console.warn('logo not loaded, using text mark')}
+ for(let i=0;i<P.length;i++){try{await build(i)}catch(e){console.error(e);const l=document.querySelector('#st'+i+' .loading');if(l)l.innerHTML='Images could not load. <a href="?r='+Date.now()+'" style="border-bottom:1px solid">Reload</a>'}}
  renderStatic()})();
 </script>
 </body>
