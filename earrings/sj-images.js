@@ -51,8 +51,8 @@
     return c;
   }
   function canvas(W, H, bg) { const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d'); x.fillStyle = bg; x.fillRect(0, 0, W, H); return [c, x]; }
-  function mark(x, W, H, dark) { const L = dark ? LOGO.w : LOGO.n; x.save(); x.globalAlpha = dark ? .55 : .32;
-    if (L) { const lw = W * .16, lh = lw * 20 / 166; x.drawImage(L, (W - lw) / 2, H - lh - H * .04, lw, lh); }
+  function mark(x, W, H, dark) { const L = dark ? LOGO.w : LOGO.n; x.save(); x.globalAlpha = dark ? .6 : .42;
+    if (L) { const lw = W * .18, lh = lw * 20 / 166; x.drawImage(L, (W - lw) / 2, H - lh - H * .04, lw, lh); }
     else { x.fillStyle = dark ? '#fff' : NAVY; x.textAlign = 'center'; x.font = '400 ' + (W * .028) + 'px ' + SERIF; x.fillText('STELLA JAMES', W / 2, H * .95); }
     x.restore(); }
   function placeOn(x, img, an, W, H, share, cy, opt) {
@@ -78,7 +78,7 @@
   async function worn(img, pt, o) { o = o || {}; await logos(); const W = o.W || 1600, H = o.H || 2000, [c, x] = canvas(W, H, '#ddd');
     const r = Math.max(W / img.naturalWidth, H / img.naturalHeight), iw = img.naturalWidth * r, ih = img.naturalHeight * r;
     const ox = Math.min(0, Math.max(W - iw, W / 2 - pt[0] * iw)), oy = Math.min(0, Math.max(H - ih, H * .45 - pt[1] * ih)); x.drawImage(img, ox, oy, iw, ih);
-    const ex = ox + pt[0] * iw, ey = oy + pt[1] * ih, R = W * .2, cx = ex < W / 2 ? W - R - W * .07 : R + W * .07, cy = ey < H / 2 ? H - R - H * .12 : R + H * .1, z = 3.2;
+    const ex = ox + pt[0] * iw, ey = oy + pt[1] * ih, R = W * .2, z0 = img.naturalWidth < 1500 ? 2.2 : 3.2, cx = ex < W / 2 ? W - R - W * .07 : R + W * .07, cy = ey < H / 2 ? H - R - H * .12 : R + H * .1, z = z0;
     x.save(); x.strokeStyle = 'rgba(255,255,255,.9)'; x.lineWidth = 3; x.beginPath(); x.arc(ex, ey, W * .035, 0, 7); x.stroke();
     const ang = Math.atan2(cy - ey, cx - ex); x.beginPath(); x.moveTo(ex + Math.cos(ang) * W * .035, ey + Math.sin(ang) * W * .035); x.lineTo(cx - Math.cos(ang) * R, cy - Math.sin(ang) * R); x.stroke();
     x.beginPath(); x.arc(cx, cy, R, 0, 7); x.closePath(); x.shadowColor = 'rgba(20,21,70,.35)'; x.shadowBlur = 40; x.fillStyle = '#fff'; x.fill(); x.shadowColor = 'transparent'; x.clip();
